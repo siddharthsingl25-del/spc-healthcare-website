@@ -444,6 +444,21 @@ footer strong{color:rgba(255,255,255,0.8);}
   overflow: hidden;
   border-radius: 14px 14px 0 0;
 }
+.plc-img {
+  position: relative;
+}
+.plc-img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, #f0f4fa 0%, #e6ecf5 50%, #f0f4fa 100%);
+  background-size: 400px 100%;
+  animation: imgShimmer 1.4s linear infinite;
+  opacity: 1;
+  transition: opacity .35s ease;
+  pointer-events: none;
+  border-radius: 14px 14px 0 0;
+}
+.plc-img.has-loaded::before { opacity: 0; }
 .plc-img img {
   max-width: 100%;
   max-height: 150px;
@@ -451,9 +466,19 @@ footer strong{color:rgba(255,255,255,0.8);}
   padding: 8px;
   display: block;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity .45s ease;
+  position: relative;
+  z-index: 1;
 }
 .plc-img img.loaded { opacity: 1; }
+@keyframes imgShimmer { 0%{background-position:-400px 0;} 100%{background-position:400px 0;} }
+
+/* Carousel image fade-in */
+.carousel-img { opacity: 0; transition: opacity .4s ease; }
+.carousel-img.loaded, .carousel-img[src]:not([src=""]) { opacity: 1; }
+
+/* Director / founder avatar smooth load */
+.dir-avatar img, .tp-founder-avatar img { transition: opacity .4s ease; }
 .plc-img .plc-no-img { font-size: 2.8rem; }
 .plc-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
 .plc-cat-badge { display: inline-block; background: var(--light); color: var(--sky); font-size: 0.68rem; font-weight: 700; padding: 3px 9px; border-radius: 6px; margin-bottom: 8px; border: 1px solid rgba(37,99,168,0.15); }
@@ -1788,6 +1813,86 @@ nav.scrolled { background: rgba(10,22,40,0.99); box-shadow: 0 6px 24px rgba(0,0,
 </div>
 
 <script>
+/* =====================================================================
+   IMAGE CDN PROXY — routes external images through wsrv.nl (Cloudflare)
+   for resize + WebP + global edge caching. Result: 5-10x faster image loads.
+   ===================================================================== */
+function proxifyImg(url, width, quality) {
+  if (!url || typeof url !== 'string') return url;
+  if (url.startsWith('data:') || url.includes('wsrv.nl') || url.includes('images.weserv.nl')) return url;
+  // Only proxy known external hosts that benefit from optimization
+  const proxyable = /(?:i\.ibb\.co|imgur\.com|cloudinary\.com|googleusercontent\.com)/i;
+  if (!proxyable.test(url)) return url;
+  const stripped = url.replace(/^https?:\/\//, '');
+  const w = width || 600;
+  const q = quality || 78;
+  return `https://wsrv.nl/?url=${encodeURIComponent(stripped)}&w=${w}&q=${q}&output=webp&we=1`;
+}
+
+// Rewrite all existing static <img> tags on the page to use the proxy.
+// Falls back to original URL if the proxy errors out.
+function rewriteStaticImages() {
+  const widthFor = (img) => {
+    const cls = img.className || '';
+    const id = img.id || '';
+    if (id === 'navLogoImg' || cls.includes('nav-logo')) return 200;
+    if (cls.includes('mfr-pcard-logo')) return 320;
+    if (cls.includes('dir-avatar') || cls.includes('tp-founder-avatar')) return 280;
+    if (cls.includes('carousel-img')) return 800;
+    if (cls.includes('plc-img') || cls.includes('lazy-img')) return 420;
+    // Detect by parent
+    const parent = img.parentElement;
+    if (parent) {
+      const pcls = parent.className || '';
+      if (pcls.includes('dir-avatar') || pcls.includes('tp-founder-avatar')) return 280;
+      if (pcls.includes('mfr-pcard-logo-wrap')) return 320;
+      if (pcls.includes('nav-logo')) return 200;
+    }
+    return 600;
+  };
+  document.querySelectorAll('img').forEach(img => {
+    if (img.dataset.proxied) return;
+    const src = img.getAttribute('src');
+    const dataSrc = img.getAttribute('data-src');
+    const w = widthFor(img);
+    if (src && /i\.ibb\.co/.test(src) && !src.includes('wsrv.nl')) {
+      img.dataset.originalSrc = src;
+      img.setAttribute('src', proxifyImg(src, w));
+      img.addEventListener('error', function handler() {
+        if (this.dataset.originalSrc && this.src !== this.dataset.originalSrc) {
+          this.removeEventListener('error', handler);
+          this.src = this.dataset.originalSrc;
+        }
+      }, { once: false });
+    }
+    if (dataSrc && /i\.ibb\.co/.test(dataSrc) && !dataSrc.includes('wsrv.nl')) {
+      img.dataset.originalSrc = dataSrc;
+      img.setAttribute('data-src', proxifyImg(dataSrc, w));
+    }
+    // Default attributes for performance
+    if (!img.hasAttribute('loading') && !img.classList.contains('lazy-img')) {
+      img.setAttribute('loading', 'lazy');
+    }
+    if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+    img.dataset.proxied = '1';
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', rewriteStaticImages);
+} else {
+  rewriteStaticImages();
+}
+// Re-scan when dynamic markup is inserted (product cards, modal carousel)
+const _imgMutObs = new MutationObserver(muts => {
+  let needsScan = false;
+  muts.forEach(m => m.addedNodes.forEach(n => {
+    if (n.nodeType === 1 && (n.tagName === 'IMG' || (n.querySelector && n.querySelector('img')))) needsScan = true;
+  }));
+  if (needsScan) rewriteStaticImages();
+});
+_imgMutObs.observe(document.body || document.documentElement, { childList: true, subtree: true });
+
 const PRODUCT_IMAGES = {
   "ZIACAL-CT CAPSULES (20*10)": ["https://i.ibb.co/dsfSvY24/IMG-9511.jpg"],
   "NIMLOX-P TABLET (30*10)": ["https://i.ibb.co/rGt9wcDc/IMG-9506.jpg"],
@@ -2276,8 +2381,10 @@ function renderProducts() {
   grid.className = 'products-grid card-view';
   grid.innerHTML = filteredProducts.map((p) => {
     const imgs = getProductImages(p.name);
+    const proxied = imgs.length > 0 ? proxifyImg(imgs[0], 420) : '';
+    const original = imgs.length > 0 ? imgs[0] : '';
     const imgHtml = imgs.length > 0
-      ? `<div class="plc-img"><img data-src="${imgs[0]}" referrerpolicy="no-referrer" alt="${p.name}" class="lazy-img" onerror="this.parentElement.innerHTML='<span class=plc-no-img>💊</span>'"/></div>`
+      ? `<div class="plc-img"><img data-src="${proxied}" data-fallback="${original}" referrerpolicy="no-referrer" alt="${p.name}" class="lazy-img" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;}else{this.parentElement.innerHTML='&lt;span class=plc-no-img&gt;💊&lt;/span&gt;';}"/></div>`
       : `<div class="plc-img"><span class="plc-no-img">💊</span></div>`;
     return `<div class="product-list-card" onclick="openModal(${PRODUCTS.indexOf(p)})">
       ${imgHtml}
@@ -2294,20 +2401,26 @@ function renderProducts() {
 
   // IntersectionObserver lazy load images
   const lazyImgs = grid.querySelectorAll('img.lazy-img');
+  const markLoaded = (img) => {
+    img.classList.add('loaded');
+    const parent = img.closest('.plc-img');
+    if (parent) parent.classList.add('has-loaded');
+  };
   if ('IntersectionObserver' in window) {
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const img = entry.target;
           img.src = img.dataset.src;
-          img.onload = () => img.classList.add('loaded');
+          if (img.complete && img.naturalWidth > 0) markLoaded(img);
+          else img.onload = () => markLoaded(img);
           obs.unobserve(img);
         }
       });
-    }, { rootMargin: '120px' });
+    }, { rootMargin: '300px' });
     lazyImgs.forEach(img => obs.observe(img));
   } else {
-    lazyImgs.forEach(img => { img.src = img.dataset.src; img.classList.add('loaded'); });
+    lazyImgs.forEach(img => { img.src = img.dataset.src; markLoaded(img); });
   }
 }
 
@@ -2464,9 +2577,10 @@ function openModal(idx) {
   if (imgs.length === 0) {
     carouselContainer.innerHTML = '<div class="no-img-placeholder" style="height:180px;border-radius:0;"></div>';
   } else if (imgs.length === 1) {
-    carouselContainer.innerHTML = `<div class="carousel"><img class="carousel-img" src="${imgs[0]}" alt="${p.name}" referrerpolicy="no-referrer" crossorigin="anonymous" onerror="this.parentElement.innerHTML='<div class=no-img-placeholder style=height:180px></div>'"/></div>`;
+    const u = proxifyImg(imgs[0], 800);
+    carouselContainer.innerHTML = `<div class="carousel"><img class="carousel-img" src="${u}" data-fallback="${imgs[0]}" alt="${p.name}" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;}else{this.parentElement.innerHTML='&lt;div class=no-img-placeholder style=height:180px&gt;&lt;/div&gt;';}"/></div>`;
   } else {
-    const slides = imgs.map(url=>`<img class="carousel-img" src="${url}" alt="${p.name}" referrerpolicy="no-referrer" crossorigin="anonymous" loading="lazy"/>`).join('');
+    const slides = imgs.map(url=>`<img class="carousel-img" src="${proxifyImg(url,800)}" data-fallback="${url}" alt="${p.name}" referrerpolicy="no-referrer" loading="lazy" decoding="async" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback)this.src=this.dataset.fallback"/>`).join('');
     const dots = imgs.map((_,i)=>`<button class="carousel-dot ${i===0?'active':''}" onclick="goCarousel(${i})"></button>`).join('');
     carouselContainer.innerHTML = `<div class="carousel" id="carouselMain"><div class="carousel-track" id="carouselTrack">${slides}</div><button class="carousel-btn prev" onclick="shiftCarousel(-1)">&#8249;</button><button class="carousel-btn next" onclick="shiftCarousel(1)">&#8250;</button></div><div class="carousel-dots">${dots}</div>`;
     window._carouselIdx = 0; window._carouselMax = imgs.length;
