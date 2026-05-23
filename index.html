@@ -959,6 +959,170 @@ img, svg, video { max-width: 100%; height: auto; }
   .nav-brand span:first-child { font-size: 0.88rem; }
 }
 
+/* ===================================================================
+   LIGHT PINK THEME — backgrounds become pink, accents become navy/blue
+   --navy stays dark because it's also used for body text colors
+   --accent (blue) and --sky (pink) swap roles
+   =================================================================== */
+:root {
+  --navy: #0F172A;         /* stays dark — used for text + label colors */
+  --royal: #1E2D7E;        /* deep brand navy */
+  --sky: #D9276E;          /* secondary accent — pink */
+  --accent: #1E2D7E;       /* primary accent — navy/blue */
+  --text: #0F172A;
+  --light: #FFF1F6;        /* very light pink — used by .categories-section etc */
+  --lightgray: #F8D8E3;    /* soft pink-tinted border */
+  --gray: #475569;
+  --card-bg: #FFFFFF;
+}
+
+/* Force all dark obsidian backgrounds → light pink gradient */
+.hero, .mfr-partners, .contact-section,
+.careers-hero, .tp-hero, .tp-values, #teamPage .tp-hero, #careersPage .careers-hero {
+  background: linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 50%, #F9A8D4 100%) !important;
+}
+.tp-values { background: linear-gradient(135deg, #FFF1F6 0%, #FCE7F3 100%) !important; }
+.careers-body { background: linear-gradient(135deg, #FFF1F6 0%, #FCE7F3 100%) !important; }
+footer { background: #F9A8D4 !important; color: rgba(15,23,42,0.7) !important; border-top: 1px solid #F472B6 !important; }
+footer strong { color: #0F172A !important; }
+.about-highlight { background: #FFF !important; color: #0F172A !important; border: 1.5px solid #F8D8E3 !important; box-shadow: 0 4px 18px rgba(217,39,110,0.08) !important; }
+.about-highlight h3 { color: #1E2D7E !important; }
+.about-highlight p { color: #475569 !important; }
+.hr-contact { background: #FFF !important; border: 1.5px solid #F8D8E3 !important; }
+.hr-contact h4 { color: #1E2D7E !important; }
+.hr-contact p { color: #475569 !important; }
+.hr-contact a { color: #D9276E !important; }
+
+/* Hero text colors flip for light background */
+.hero-title { color: #0F172A !important; }
+.hero-title .accent { color: #1E2D7E !important; }
+.hero-subtitle { color: #475569 !important; }
+.hero-badge { background: rgba(30,45,126,0.08) !important; border-color: rgba(30,45,126,0.25) !important; color: #1E2D7E !important; }
+.hero-badge span { background: #1E2D7E !important; }
+.hero-card { background: #FFF !important; border: 1.5px solid #F8D8E3 !important; box-shadow: 0 6px 24px rgba(217,39,110,0.06) !important; }
+.hero-card h3 { color: #0F172A !important; }
+.hero-card p { color: #475569 !important; }
+.hero-stat { background: #FFF !important; border: 1.5px solid #F8D8E3 !important; box-shadow: 0 4px 16px rgba(217,39,110,0.06) !important; }
+.hero-stat strong { color: #1E2D7E !important; }
+.hero-stat span { color: #475569 !important; }
+.hero-stat:hover { background: #FFF1F6 !important; border-color: rgba(30,45,126,0.30) !important; }
+.btn-outline { color: #1E2D7E !important; border-color: rgba(30,45,126,0.30) !important; }
+.btn-outline:hover { border-color: #1E2D7E !important; color: #1E2D7E !important; background: rgba(30,45,126,0.05) !important; }
+.hero-orb-1 { background: radial-gradient(circle, rgba(217,39,110,0.25), transparent) !important; }
+.hero-orb-2 { background: radial-gradient(circle, rgba(30,45,126,0.20), transparent) !important; }
+.hero-bg-pattern { opacity: 0.08 !important; background-image: radial-gradient(circle at 1px 1px, #1E2D7E 1px, transparent 0) !important; }
+
+/* Manufacturer ticker on light pink */
+.mfr-partners .section-title, .mfr-partners-title { color: #0F172A !important; }
+.mfr-partners-title span { color: #1E2D7E !important; }
+.mfr-partners-sub { color: #475569 !important; }
+.mfr-partners-tag { background: rgba(30,45,126,0.08) !important; color: #1E2D7E !important; border-color: rgba(30,45,126,0.20) !important; }
+.mfr-pcard { background: #FFF !important; border: 1.5px solid #F8D8E3 !important; box-shadow: 0 4px 16px rgba(217,39,110,0.05) !important; }
+.mfr-pcard:hover { background: #FFF1F6 !important; border-color: rgba(30,45,126,0.30) !important; box-shadow: 0 12px 32px rgba(30,45,126,0.12) !important; }
+.mfr-pcard-name { color: #475569 !important; }
+.mfr-pcard:hover .mfr-pcard-name { color: #1E2D7E !important; }
+.mfr-pcard-logo { filter: none !important; opacity: 0.85 !important; }
+.mfr-pcard:hover .mfr-pcard-logo { opacity: 1 !important; }
+.mfr-ticker::before { background: linear-gradient(to right, #FBCFE8 0%, transparent 100%) !important; }
+.mfr-ticker::after { background: linear-gradient(to left, #FBCFE8 0%, transparent 100%) !important; }
+.mfr-strip-item { color: #475569 !important; }
+.mfr-strip-item span { color: #1E2D7E !important; }
+.mfr-strip-divider { background: rgba(30,45,126,0.20) !important; }
+
+/* Contact section on light pink */
+.contact-section .section-title { color: #0F172A !important; }
+.contact-section .section-title span { color: #D9276E !important; }
+.contact-section .section-sub { color: #475569 !important; }
+.contact-section .section-tag { background: rgba(30,45,126,0.08) !important; color: #1E2D7E !important; border-color: rgba(30,45,126,0.20) !important; }
+.contact-item { background: #FFF !important; border: 1.5px solid #F8D8E3 !important; box-shadow: 0 4px 16px rgba(217,39,110,0.05) !important; }
+.contact-item:hover { background: #FFF1F6 !important; border-color: rgba(30,45,126,0.30) !important; }
+.contact-item h4 { color: #475569 !important; }
+.contact-item p { color: #0F172A !important; }
+.contact-item p a { color: #1E2D7E !important; }
+
+/* Careers + Team hero */
+.careers-hero h1, .tp-hero h1 { color: #0F172A !important; }
+.careers-hero h1 span, .tp-hero h1 em { color: #1E2D7E !important; }
+.careers-hero p, .tp-hero p { color: #475569 !important; }
+.tp-hero-stats { background: #FFF !important; border: 1.5px solid #F8D8E3 !important; }
+.tp-hero-stat { border-right-color: #F8D8E3 !important; }
+.tp-hero-stat strong { color: #1E2D7E !important; }
+.tp-hero-stat span { color: #475569 !important; }
+.tp-scroll { color: #475569 !important; }
+.tp-scroll-line { background: linear-gradient(to bottom, rgba(30,45,126,0.5), transparent) !important; }
+
+/* Team values dark section -> light */
+.tp-values h2 { color: #0F172A !important; }
+.tp-values > .tp-values-inner > p { color: #475569 !important; }
+.tp-value-card { background: #FFF !important; border: 1.5px solid #F8D8E3 !important; }
+.tp-value-card:hover { background: #FFF1F6 !important; }
+.tp-value-num { color: rgba(30,45,126,0.15) !important; }
+.tp-value-title { color: #0F172A !important; }
+.tp-value-desc { color: #475569 !important; }
+
+/* Founder card dark gradient -> keep some dark for contrast OR also light */
+.tp-founder-left { background: linear-gradient(160deg, #1E2D7E 0%, #2D3D9A 100%) !important; }
+.tp-founder-name { color: #FFF !important; }
+.tp-founder-role { color: #FBCFE8 !important; }
+.tp-founder-quote { color: rgba(255,255,255,0.85) !important; border-left-color: #FBCFE8 !important; }
+.tp-founder-links a { color: rgba(255,255,255,0.8) !important; }
+
+/* NAV stays dark navy as the anchor */
+nav { background: rgba(30,45,126,0.97) !important; border-bottom-color: rgba(255,255,255,0.10) !important; }
+nav.scrolled { background: rgba(30,45,126,0.99) !important; box-shadow: 0 6px 24px rgba(30,45,126,0.30) !important; }
+.nav-search-box { background: rgba(255,255,255,0.10) !important; border-color: rgba(255,255,255,0.18) !important; }
+.nav-search-box input { color: #FFF !important; }
+.nav-search-box input::placeholder { color: rgba(255,255,255,0.55) !important; }
+.nav-search-box button { background: #D9276E !important; color: #FFF !important; }
+.nav-search-box button:hover { background: #B01F5D !important; }
+.nav-cta { background: #D9276E !important; color: #FFF !important; }
+.nav-cta:hover { background: #B01F5D !important; }
+nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.30) !important; color: #FFF !important; }
+
+/* Buttons — primary is navy/blue, hover slightly lighter */
+.btn-primary { background: linear-gradient(135deg, #1E2D7E, #3B4FCB) !important; color: #FFF !important; box-shadow: 0 4px 20px rgba(30,45,126,0.35) !important; }
+.btn-primary:hover { box-shadow: 0 8px 30px rgba(30,45,126,0.50) !important; }
+.plc-btn, .product-view-btn { background: linear-gradient(135deg, #1E2D7E, #3B4FCB) !important; color: #FFF !important; }
+
+/* Section tags + headings on light pink sections */
+.section-tag { background: rgba(30,45,126,0.08) !important; color: #1E2D7E !important; border-color: rgba(30,45,126,0.20) !important; }
+.section-title .blue { color: #D9276E !important; }
+.section-title { color: #0F172A !important; }
+
+/* Categories cards keep white background — just adjust accent */
+.categories-section { background: #FFF1F6 !important; }
+.cat-card.active { background: linear-gradient(135deg, rgba(30,45,126,0.06), rgba(217,39,110,0.06)) !important; }
+
+/* About + Why-partner sections */
+.about-section { background: linear-gradient(135deg, #FFF1F6 0%, #FCE7F3 100%) !important; }
+.why-partner { background: linear-gradient(160deg, #FFF1F6 0%, #FCE7F3 100%) !important; }
+.why-partner::before { background: radial-gradient(circle, rgba(30,45,126,0.10), transparent 70%) !important; }
+.why-partner::after { background: radial-gradient(circle, rgba(217,39,110,0.10), transparent 70%) !important; }
+
+/* Why-stats band stays dark for contrast but uses navy */
+.why-stats-band { background: linear-gradient(135deg, #1E2D7E 0%, #2D3D9A 50%, #1E2D7E 100%) !important; box-shadow: 0 24px 60px rgba(30,45,126,0.25) !important; }
+.why-stats-band::after { background: radial-gradient(circle, rgba(217,39,110,0.40), transparent 70%) !important; }
+.why-stat strong { color: #FBCFE8 !important; }
+.why-stat span { color: rgba(255,255,255,0.65) !important; }
+.why-stat + .why-stat { border-left-color: rgba(255,255,255,0.10) !important; }
+
+/* Product modal */
+.modal-header { background: linear-gradient(135deg, #1E2D7E, #2D3D9A) !important; }
+
+/* Director card / about features */
+.about-feature-icon { background: linear-gradient(135deg, #1E2D7E, #3B4FCB) !important; }
+.contact-item-icon { background: linear-gradient(135deg, #1E2D7E, #D9276E) !important; }
+.career-perk-icon { background: linear-gradient(135deg, #1E2D7E, #3B4FCB) !important; }
+.why-card .why-icon-wrap { background: linear-gradient(135deg, rgba(30,45,126,0.12), rgba(217,39,110,0.10)) !important; }
+.why-card .why-icon-wrap svg { stroke: #1E2D7E !important; }
+
+/* Hero molecule SVG: re-tint via CSS filter (works because it's inline SVG) */
+.hero-molecule .glow-node { filter: drop-shadow(0 0 14px rgba(30,45,126,0.55)) !important; }
+
+/* Mobile nav (dark navy backdrop matches main nav) */
+.mobile-nav { background: #1E2D7E !important; }
+.mobile-nav a { border-bottom-color: rgba(255,255,255,0.10) !important; }
+
 </style>
 </head>
 <body>
