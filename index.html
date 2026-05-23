@@ -1123,6 +1123,65 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
 .mobile-nav { background: #1E2D7E !important; }
 .mobile-nav a { border-bottom-color: rgba(255,255,255,0.10) !important; }
 
+/* ===================================================================
+   HOMEPAGE BANNER CAROUSEL
+   =================================================================== */
+.banner-carousel { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; padding: 32px 24px 0; }
+.bc-frame { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 24px 60px rgba(30,45,126,0.18); background: #1E2D7E; aspect-ratio: 16 / 6; }
+.bc-track { display: flex; height: 100%; width: 100%; transition: transform .7s cubic-bezier(.65,.05,.2,1); }
+.bc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; }
+.bc-slide img, .bc-slide .bc-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.bc-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15,23,42,0.65) 0%, rgba(15,23,42,0.35) 50%, rgba(15,23,42,0.10) 100%); z-index: 2; }
+.bc-content { position: relative; z-index: 3; padding: 48px 60px; max-width: 640px; color: #fff; width: 100%; }
+.bc-eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #FBCFE8; background: rgba(217,39,110,0.20); border: 1px solid rgba(251,207,232,0.40); padding: 6px 14px; border-radius: 100px; margin-bottom: 16px; }
+.bc-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 900; line-height: 1.15; margin-bottom: 14px; color: #fff; }
+.bc-title span { color: #FBCFE8; }
+.bc-sub { font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,0.88); margin-bottom: 24px; max-width: 540px; }
+.bc-cta { display: inline-flex; align-items: center; gap: 10px; background: #D9276E; color: #fff; padding: 13px 28px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all .25s; box-shadow: 0 6px 20px rgba(217,39,110,0.40); }
+.bc-cta:hover { transform: translateY(-2px); background: #B01F5D; box-shadow: 0 10px 26px rgba(217,39,110,0.55); }
+
+/* Placeholder gradient slides (until real photos arrive) */
+.bc-slide-placeholder { background: linear-gradient(135deg, #1E2D7E 0%, #3B4FCB 100%); }
+.bc-slide-placeholder.alt-1 { background: linear-gradient(135deg, #D9276E 0%, #1E2D7E 100%); }
+.bc-slide-placeholder.alt-2 { background: linear-gradient(135deg, #1E2D7E 0%, #D9276E 60%, #FBCFE8 100%); }
+.bc-slide-placeholder .bc-bg-pattern { position: absolute; inset: 0; opacity: 0.10; background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 32px 32px; z-index: 1; }
+.bc-slide-placeholder .bc-watermark { position: absolute; right: 40px; bottom: 40px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); z-index: 2; padding: 6px 14px; border: 1px dashed rgba(255,255,255,0.30); border-radius: 6px; }
+
+/* Nav arrows */
+.bc-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.95); border: none; color: #1E2D7E; font-size: 1.4rem; font-weight: 700; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(0,0,0,0.20); transition: all .22s; }
+.bc-nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.08); box-shadow: 0 8px 24px rgba(0,0,0,0.30); }
+.bc-nav-btn.prev { left: 18px; }
+.bc-nav-btn.next { right: 18px; }
+
+/* Dots */
+.bc-dots { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 8px; }
+.bc-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.45); border: none; cursor: pointer; padding: 0; transition: all .22s; }
+.bc-dot.active { background: #fff; width: 28px; border-radius: 100px; }
+.bc-dot:hover { background: rgba(255,255,255,0.85); }
+
+/* Auto-rotate progress bar */
+.bc-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: #D9276E; width: 0; z-index: 5; transition: width 5s linear; }
+.bc-progress.run { width: 100%; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .banner-carousel { padding: 24px 16px 0; }
+  .bc-frame { border-radius: 18px; aspect-ratio: 4 / 3; }
+  .bc-content { padding: 32px 28px; max-width: 100%; }
+  .bc-sub { font-size: 0.92rem; }
+  .bc-nav-btn { width: 38px; height: 38px; font-size: 1.1rem; }
+  .bc-nav-btn.prev { left: 12px; }
+  .bc-nav-btn.next { right: 12px; }
+  .bc-slide-placeholder .bc-watermark { right: 16px; bottom: 16px; font-size: 0.6rem; }
+}
+@media (max-width: 600px) {
+  .bc-frame { aspect-ratio: 4 / 3.5; }
+  .bc-content { padding: 28px 22px; }
+  .bc-eyebrow { font-size: 0.66rem; padding: 5px 12px; margin-bottom: 12px; }
+  .bc-cta { padding: 11px 22px; font-size: 0.88rem; }
+  .bc-dots { bottom: 14px; }
+}
+
 </style>
 </head>
 <body>
@@ -1248,6 +1307,65 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
 </section>
 
 
+
+<!-- HOMEPAGE BANNER CAROUSEL (placeholder slides — replace .bc-bg with real images) -->
+<section class="banner-carousel" id="bannerCarousel" aria-roledescription="carousel" aria-label="Featured promotions">
+  <div class="bc-frame">
+    <div class="bc-track" id="bcTrack">
+
+      <!-- Slide 1 -->
+      <div class="bc-slide bc-slide-placeholder" data-slide="0">
+        <!-- TODO: replace with <img class="bc-bg" src="YOUR_IMAGE_1.jpg" alt="..."> -->
+        <div class="bc-bg-pattern"></div>
+        <div class="bc-content">
+          <span class="bc-eyebrow">★ Now Available</span>
+          <h2 class="bc-title">Premium Pharma <span>Trusted Pan-India</span></h2>
+          <p class="bc-sub">159+ products across 10 divisions — sourced from WHO-GMP certified manufacturers and delivered to hospitals, distributors and retail chains nationwide.</p>
+          <a href="#categories" class="bc-cta">Explore Catalog →</a>
+        </div>
+        <span class="bc-watermark">Slide 1 · Replace</span>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="bc-slide bc-slide-placeholder alt-1" data-slide="1">
+        <!-- TODO: replace with <img class="bc-bg" src="YOUR_IMAGE_2.jpg" alt="..."> -->
+        <div class="bc-bg-pattern"></div>
+        <div class="bc-content">
+          <span class="bc-eyebrow">⚡ New Launch</span>
+          <h2 class="bc-title">Built for <span>B2B Partners</span></h2>
+          <p class="bc-sub">Competitive pricing, 98% on-time delivery, dedicated account managers. Become an SPC partner and unlock institutional rates today.</p>
+          <a href="#contact" class="bc-cta">Become a Partner →</a>
+        </div>
+        <span class="bc-watermark">Slide 2 · Replace</span>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="bc-slide bc-slide-placeholder alt-2" data-slide="2">
+        <!-- TODO: replace with <img class="bc-bg" src="YOUR_IMAGE_3.jpg" alt="..."> -->
+        <div class="bc-bg-pattern"></div>
+        <div class="bc-content">
+          <span class="bc-eyebrow">🏆 Award Winning</span>
+          <h2 class="bc-title">Quality You Can <span>Audit</span></h2>
+          <p class="bc-sub">CDSCO approved · ISO 9001 · WHO-GMP standards. Batch-level documentation available for every order placed.</p>
+          <a href="#why" class="bc-cta">Why Partner With Us →</a>
+        </div>
+        <span class="bc-watermark">Slide 3 · Replace</span>
+      </div>
+
+    </div>
+
+    <button class="bc-nav-btn prev" id="bcPrev" aria-label="Previous slide">‹</button>
+    <button class="bc-nav-btn next" id="bcNext" aria-label="Next slide">›</button>
+
+    <div class="bc-dots" id="bcDots" role="tablist">
+      <button class="bc-dot active" data-go="0" aria-label="Go to slide 1"></button>
+      <button class="bc-dot" data-go="1" aria-label="Go to slide 2"></button>
+      <button class="bc-dot" data-go="2" aria-label="Go to slide 3"></button>
+    </div>
+
+    <div class="bc-progress" id="bcProgress"></div>
+  </div>
+</section>
 
 <!-- CATEGORIES -->
 <section class="categories-section" id="categories">
@@ -3343,6 +3461,79 @@ dropZone.addEventListener('drop', e => {
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // -------- HOMEPAGE BANNER CAROUSEL --------
+  (function bannerCarousel() {
+    const track = document.getElementById('bcTrack');
+    if (!track) return;
+    const slides = track.querySelectorAll('.bc-slide');
+    const dots = document.querySelectorAll('#bcDots .bc-dot');
+    const prog = document.getElementById('bcProgress');
+    const prevBtn = document.getElementById('bcPrev');
+    const nextBtn = document.getElementById('bcNext');
+    const frame = track.parentElement;
+    let idx = 0;
+    const total = slides.length;
+    const AUTO_MS = 5000;
+    let timer = null;
+    let isHover = false;
+
+    function go(n) {
+      idx = ((n % total) + total) % total;
+      track.style.transform = `translateX(-${idx * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      restart();
+    }
+    function next() { go(idx + 1); }
+    function prev() { go(idx - 1); }
+    function restart() {
+      clearTimeout(timer);
+      if (prog) {
+        prog.classList.remove('run');
+        // reflow + run
+        void prog.offsetWidth;
+        if (!prefersReduced && !isHover) prog.classList.add('run');
+      }
+      if (prefersReduced || isHover) return;
+      timer = setTimeout(next, AUTO_MS);
+    }
+
+    prevBtn && prevBtn.addEventListener('click', prev);
+    nextBtn && nextBtn.addEventListener('click', next);
+    dots.forEach(d => d.addEventListener('click', () => go(parseInt(d.dataset.go, 10))));
+
+    // Pause on hover
+    frame.addEventListener('mouseenter', () => { isHover = true; clearTimeout(timer); if (prog) prog.classList.remove('run'); });
+    frame.addEventListener('mouseleave', () => { isHover = false; restart(); });
+
+    // Touch swipe
+    let touchX = 0;
+    frame.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    frame.addEventListener('touchend', e => {
+      const dx = (e.changedTouches[0].clientX) - touchX;
+      if (Math.abs(dx) > 50) { if (dx < 0) next(); else prev(); }
+    }, { passive: true });
+
+    // Keyboard accessibility
+    frame.tabIndex = 0;
+    frame.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') prev();
+      else if (e.key === 'ArrowRight') next();
+    });
+
+    // Pause when carousel is off-screen
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (en.isIntersecting) restart();
+          else { clearTimeout(timer); if (prog) prog.classList.remove('run'); }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(frame);
+    } else {
+      restart();
+    }
+  })();
 
   // Subtle parallax on hero molecule
   const mol = document.querySelector('.hero-molecule');
