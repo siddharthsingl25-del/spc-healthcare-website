@@ -1126,7 +1126,8 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
 /* ===================================================================
    HOMEPAGE BANNER CAROUSEL
    =================================================================== */
-.banner-carousel { position: relative; width: 100%; max-width: 100%; margin: 0; padding: 0; }
+.banner-carousel { position: relative; width: 100%; max-width: 100%; margin: 70px 0 0; padding: 0; }
+@media (max-width: 600px) { .banner-carousel { margin-top: 62px; } }
 .bc-frame { position: relative; border-radius: 0; overflow: hidden; box-shadow: 0 12px 40px rgba(30,45,126,0.10); background: #1E2D7E; aspect-ratio: 2045 / 740; }
 .bc-track { display: flex; height: 100%; width: 100%; transition: transform .7s cubic-bezier(.65,.05,.2,1); }
 .bc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: block; overflow: hidden; text-decoration: none; cursor: pointer; }
@@ -1229,6 +1230,54 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
 
 <!-- HERO -->
 <div id="mainSite">
+
+<!-- HOMEPAGE BANNER CAROUSEL — full-bleed banner images (right under nav) -->
+<section class="banner-carousel" id="bannerCarousel" aria-roledescription="carousel" aria-label="Featured product ranges">
+  <div class="bc-frame">
+    <div class="bc-track" id="bcTrack">
+
+      <a class="bc-slide" href="#categories" data-slide="0" aria-label="View our pediatric range">
+        <img class="bc-bg" src="https://i.ibb.co/gM9KYpFY/mother-child-banner2.jpg" alt="SPC Healthcare — Secure, Pure & Cure" loading="eager" fetchpriority="high">
+      </a>
+
+      <a class="bc-slide" href="#categories" data-slide="1" aria-label="View our skincare range">
+        <img class="bc-bg" src="https://i.ibb.co/b5zx4snN/soap-banner.jpg" alt="4wellness Glutathione Skin Brightening Soap" loading="lazy">
+      </a>
+
+      <a class="bc-slide" href="#categories" data-slide="2" aria-label="View our immunity range">
+        <img class="bc-bg" src="https://i.ibb.co/S7Gs3Y0g/antibiotics-banner2.jpg" alt="Strong Immunity, Stronger You — Antibiotics That Care" loading="lazy">
+      </a>
+
+      <a class="bc-slide" href="#categories" data-slide="3" aria-label="View our bone health range">
+        <img class="bc-bg" src="https://i.ibb.co/dsjLh9zt/lady-strong-bones-banner2.jpg" alt="Strong Bones, Stronger You" loading="lazy">
+      </a>
+
+      <a class="bc-slide" href="#categories" data-slide="4" aria-label="View our orthopedic range">
+        <img class="bc-bg" src="https://i.ibb.co/21fm00NL/ortho-banner2.jpg" alt="Stronger Joints, Happier Lives" loading="lazy">
+      </a>
+
+      <a class="bc-slide" href="#categories" data-slide="5" aria-label="View our gynae range">
+        <img class="bc-bg" src="https://i.ibb.co/RGPKwwzX/gynae-banner2.jpg" alt="Women's Healthcare Range" loading="lazy">
+      </a>
+
+    </div>
+
+    <button class="bc-nav-btn prev" id="bcPrev" aria-label="Previous slide">‹</button>
+    <button class="bc-nav-btn next" id="bcNext" aria-label="Next slide">›</button>
+
+    <div class="bc-dots" id="bcDots" role="tablist">
+      <button class="bc-dot active" data-go="0" aria-label="Go to slide 1"></button>
+      <button class="bc-dot" data-go="1" aria-label="Go to slide 2"></button>
+      <button class="bc-dot" data-go="2" aria-label="Go to slide 3"></button>
+      <button class="bc-dot" data-go="3" aria-label="Go to slide 4"></button>
+      <button class="bc-dot" data-go="4" aria-label="Go to slide 5"></button>
+      <button class="bc-dot" data-go="5" aria-label="Go to slide 6"></button>
+    </div>
+
+    <div class="bc-progress" id="bcProgress"></div>
+  </div>
+</section>
+
 <section class="hero" id="hero">
   <div class="hero-bg-pattern"></div>
   <div class="hero-orb hero-orb-1"></div>
@@ -1308,53 +1357,6 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
 </section>
 
 
-
-<!-- HOMEPAGE BANNER CAROUSEL — full-bleed banner images -->
-<section class="banner-carousel" id="bannerCarousel" aria-roledescription="carousel" aria-label="Featured product ranges">
-  <div class="bc-frame">
-    <div class="bc-track" id="bcTrack">
-
-      <a class="bc-slide" href="#categories" data-slide="0" aria-label="View our pediatric range">
-        <img class="bc-bg" src="https://i.ibb.co/gM9KYpFY/mother-child-banner2.jpg" alt="SPC Healthcare — Secure, Pure & Cure" loading="eager" fetchpriority="high">
-      </a>
-
-      <a class="bc-slide" href="#categories" data-slide="1" aria-label="View our skincare range">
-        <img class="bc-bg" src="https://i.ibb.co/b5zx4snN/soap-banner.jpg" alt="4wellness Glutathione Skin Brightening Soap" loading="lazy">
-      </a>
-
-      <a class="bc-slide" href="#categories" data-slide="2" aria-label="View our immunity range">
-        <img class="bc-bg" src="https://i.ibb.co/S7Gs3Y0g/antibiotics-banner2.jpg" alt="Strong Immunity, Stronger You — Antibiotics That Care" loading="lazy">
-      </a>
-
-      <a class="bc-slide" href="#categories" data-slide="3" aria-label="View our bone health range">
-        <img class="bc-bg" src="https://i.ibb.co/dsjLh9zt/lady-strong-bones-banner2.jpg" alt="Strong Bones, Stronger You" loading="lazy">
-      </a>
-
-      <a class="bc-slide" href="#categories" data-slide="4" aria-label="View our orthopedic range">
-        <img class="bc-bg" src="https://i.ibb.co/21fm00NL/ortho-banner2.jpg" alt="Stronger Joints, Happier Lives" loading="lazy">
-      </a>
-
-      <a class="bc-slide" href="#categories" data-slide="5" aria-label="View our gynae range">
-        <img class="bc-bg" src="https://i.ibb.co/RGPKwwzX/gynae-banner2.jpg" alt="Women's Healthcare Range" loading="lazy">
-      </a>
-
-    </div>
-
-    <button class="bc-nav-btn prev" id="bcPrev" aria-label="Previous slide">‹</button>
-    <button class="bc-nav-btn next" id="bcNext" aria-label="Next slide">›</button>
-
-    <div class="bc-dots" id="bcDots" role="tablist">
-      <button class="bc-dot active" data-go="0" aria-label="Go to slide 1"></button>
-      <button class="bc-dot" data-go="1" aria-label="Go to slide 2"></button>
-      <button class="bc-dot" data-go="2" aria-label="Go to slide 3"></button>
-      <button class="bc-dot" data-go="3" aria-label="Go to slide 4"></button>
-      <button class="bc-dot" data-go="4" aria-label="Go to slide 5"></button>
-      <button class="bc-dot" data-go="5" aria-label="Go to slide 6"></button>
-    </div>
-
-    <div class="bc-progress" id="bcProgress"></div>
-  </div>
-</section>
 
 <!-- CATEGORIES -->
 <section class="categories-section" id="categories">
