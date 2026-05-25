@@ -1126,8 +1126,8 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
 /* ===================================================================
    HOMEPAGE BANNER CAROUSEL
    =================================================================== */
-.banner-carousel { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; padding: 32px 24px 0; }
-.bc-frame { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 24px 60px rgba(30,45,126,0.18); background: #1E2D7E; aspect-ratio: 16 / 6; }
+.banner-carousel { position: relative; width: 100%; max-width: 100%; margin: 0; padding: 0; }
+.bc-frame { position: relative; border-radius: 0; overflow: hidden; box-shadow: 0 12px 40px rgba(30,45,126,0.10); background: #1E2D7E; aspect-ratio: 2045 / 740; }
 .bc-track { display: flex; height: 100%; width: 100%; transition: transform .7s cubic-bezier(.65,.05,.2,1); }
 .bc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: block; overflow: hidden; text-decoration: none; cursor: pointer; }
 .bc-slide img, .bc-slide .bc-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: block; }
@@ -1166,8 +1166,6 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
 
 /* Responsive */
 @media (max-width: 900px) {
-  .banner-carousel { padding: 24px 16px 0; }
-  .bc-frame { border-radius: 18px; aspect-ratio: 4 / 3; }
   .bc-content { padding: 32px 28px; max-width: 100%; }
   .bc-sub { font-size: 0.92rem; }
   .bc-nav-btn { width: 38px; height: 38px; font-size: 1.1rem; }
@@ -1176,11 +1174,13 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
   .bc-slide-placeholder .bc-watermark { right: 16px; bottom: 16px; font-size: 0.6rem; }
 }
 @media (max-width: 600px) {
-  .bc-frame { aspect-ratio: 4 / 3.5; }
   .bc-content { padding: 28px 22px; }
   .bc-eyebrow { font-size: 0.66rem; padding: 5px 12px; margin-bottom: 12px; }
   .bc-cta { padding: 11px 22px; font-size: 0.88rem; }
-  .bc-dots { bottom: 14px; }
+  .bc-nav-btn { width: 34px; height: 34px; font-size: 1rem; }
+  .bc-dots { bottom: 10px; gap: 6px; }
+  .bc-dot { width: 7px; height: 7px; }
+  .bc-dot.active { width: 22px; }
 }
 
 </style>
