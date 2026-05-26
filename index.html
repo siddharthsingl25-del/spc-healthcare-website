@@ -1123,11 +1123,14 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
 .mobile-nav { background: #1E2D7E !important; }
 .mobile-nav a { border-bottom-color: rgba(255,255,255,0.10) !important; }
 
+/* Body gets a soft pink tint so the gap above the banner blends with the page theme */
+body { background: #FFF1F6 !important; }
+
 /* ===================================================================
    HOMEPAGE BANNER CAROUSEL
    =================================================================== */
-.banner-carousel { position: relative; width: 100%; max-width: 100%; margin: 70px 0 0; padding: 0; }
-@media (max-width: 600px) { .banner-carousel { margin-top: 62px; } }
+.banner-carousel { position: relative; width: 100%; max-width: 100%; margin: calc(70px + 2cm) 0 0; padding: 0; background: transparent; }
+@media (max-width: 600px) { .banner-carousel { margin-top: calc(62px + 1.5cm); } }
 .bc-frame { position: relative; border-radius: 0; overflow: hidden; box-shadow: 0 12px 40px rgba(30,45,126,0.10); background: #1E2D7E; aspect-ratio: 2045 / 740; }
 .bc-track { display: flex; height: 100%; width: 100%; transition: transform .7s cubic-bezier(.65,.05,.2,1); }
 .bc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: block; overflow: hidden; text-decoration: none; cursor: pointer; }
