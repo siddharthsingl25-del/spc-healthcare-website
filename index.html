@@ -1241,27 +1241,27 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
       </a>
 
       <a class="bc-slide" href="#categories" data-slide="1" aria-label="View our gynae range">
-        <img class="bc-bg" src="https://i.ibb.co/xKN0Kx1R/gynae-banner-upscaled.png" alt="Women's Healthcare Range" loading="lazy">
+        <img class="bc-bg" src="https://i.ibb.co/xKN0Kx1R/gynae-banner-upscaled.png" alt="Women's Healthcare Range" loading="eager" fetchpriority="high">
       </a>
 
       <a class="bc-slide" href="#categories" data-slide="2" aria-label="View our orthopedic range">
-        <img class="bc-bg" src="https://i.ibb.co/JRQsgTpf/ortho-banner-upscaled.png" alt="Stronger Joints, Happier Lives" loading="lazy">
+        <img class="bc-bg" src="https://i.ibb.co/JRQsgTpf/ortho-banner-upscaled.png" alt="Stronger Joints, Happier Lives" loading="eager">
       </a>
 
       <a class="bc-slide" href="#categories" data-slide="3" aria-label="View our bone health range">
-        <img class="bc-bg" src="https://i.ibb.co/5hYSYFg4/lady-strong-bones-upscaled.png" alt="Strong Bones, Stronger You" loading="lazy">
+        <img class="bc-bg" src="https://i.ibb.co/5hYSYFg4/lady-strong-bones-upscaled.png" alt="Strong Bones, Stronger You" loading="eager">
       </a>
 
       <a class="bc-slide" href="#categories" data-slide="4" aria-label="View our adult care range">
-        <img class="bc-bg" src="https://i.ibb.co/9XKYkrQ/adults-upscaled.png" alt="Strong Immunity, Stronger You" loading="lazy">
+        <img class="bc-bg" src="https://i.ibb.co/9XKYkrQ/adults-upscaled.png" alt="Strong Immunity, Stronger You" loading="eager">
       </a>
 
       <a class="bc-slide" href="#categories" data-slide="5" aria-label="View our kids range">
-        <img class="bc-bg" src="https://i.ibb.co/9kGBjff2/kida-upscaled.png" alt="Pediatric & Kids Care Range" loading="lazy">
+        <img class="bc-bg" src="https://i.ibb.co/9kGBjff2/kida-upscaled.png" alt="Pediatric & Kids Care Range" loading="eager">
       </a>
 
       <a class="bc-slide" href="#categories" data-slide="6" aria-label="View our skincare range">
-        <img class="bc-bg" src="https://i.ibb.co/DPVnV6ML/soaps-banner-upscaled.png" alt="Glutathione Skin Brightening Soap" loading="lazy">
+        <img class="bc-bg" src="https://i.ibb.co/DPVnV6ML/soaps-banner-upscaled.png" alt="Glutathione Skin Brightening Soap" loading="eager">
       </a>
 
     </div>
@@ -3464,6 +3464,27 @@ dropZone.addEventListener('drop', e => {
     const track = document.getElementById('bcTrack');
     if (!track) return;
     const slides = track.querySelectorAll('.bc-slide');
+
+    // Aggressive preload: fetch all banner images into browser cache immediately
+    // so clicking next/prev or auto-rotate is instant (no spinner, no flash).
+    function preloadAll() {
+      slides.forEach((slide) => {
+        const img = slide.querySelector('img.bc-bg');
+        if (!img) return;
+        const src = img.currentSrc || img.src;
+        if (!src) return;
+        // Skip if already cached/loaded
+        if (img.complete && img.naturalWidth > 0) return;
+        const pre = new Image();
+        pre.decoding = 'async';
+        pre.src = src;
+      });
+    }
+    // Kick preload now AND again after window load (covers proxy rewrites)
+    preloadAll();
+    if (document.readyState === 'complete') setTimeout(preloadAll, 200);
+    else window.addEventListener('load', () => setTimeout(preloadAll, 200), { once: true });
+
     const dots = document.querySelectorAll('#bcDots .bc-dot');
     const prog = document.getElementById('bcProgress');
     const prevBtn = document.getElementById('bcPrev');
