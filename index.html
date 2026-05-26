@@ -1135,8 +1135,50 @@ body { background: #FFF1F6 !important; }
 /* ===================================================================
    HOMEPAGE BANNER CAROUSEL
    =================================================================== */
-.banner-carousel { position: relative; width: 100%; max-width: 100%; margin: calc(70px + 2cm) 0 0; padding: 0; background: transparent; }
-@media (max-width: 600px) { .banner-carousel { margin-top: calc(62px + 1.5cm); } }
+.banner-carousel { position: relative; width: 100%; max-width: 100%; margin: 0 0 0; padding: 0; background: transparent; }
+
+/* Stats rotator pill — sits between nav and banner, rotates every 2s */
+.stats-rotator { margin: calc(70px + 14px) 0 14px; padding: 0 16px; display: flex; justify-content: center; }
+@media (max-width: 600px) { .stats-rotator { margin: calc(62px + 10px) 0 10px; } }
+.sr-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 280px;
+  height: 50px;
+  padding: 0 32px;
+  background: #fff;
+  border: 1.5px solid rgba(217,39,110,0.18);
+  border-radius: 100px;
+  box-shadow: 0 8px 28px rgba(217,39,110,0.12), 0 0 0 6px rgba(217,39,110,0.04);
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .sr-pill { min-width: 240px; height: 44px; padding: 0 22px; font-size: 0.85rem; }
+}
+.sr-item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: #1E2D7E;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+  white-space: nowrap;
+}
+.sr-item.active { opacity: 1; transform: none; }
+.sr-item.exiting { opacity: 0; transform: translateY(-10px); }
+.sr-icon { font-size: 1.15rem; line-height: 1; }
+.sr-num { color: #D9276E; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.15rem; margin-right: 2px; }
+.sr-pill::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(120deg, transparent, rgba(217,39,110,0.10), transparent); animation: srShine 4s linear infinite; }
+@keyframes srShine { 0%{left:-100%;} 60%{left:120%;} 100%{left:120%;} }
 .bc-frame { position: relative; border-radius: 0; overflow: hidden; box-shadow: 0 12px 40px rgba(30,45,126,0.10); background: #1E2D7E; aspect-ratio: 2045 / 740; }
 .bc-track { display: flex; height: 100%; width: 100%; transition: transform .7s cubic-bezier(.65,.05,.2,1); }
 .bc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: block; overflow: hidden; text-decoration: none; cursor: pointer; }
@@ -1239,6 +1281,15 @@ body { background: #FFF1F6 !important; }
 
 <!-- HERO -->
 <div id="mainSite">
+
+<!-- STATS ROTATOR — rotating pill between nav and banner -->
+<div class="stats-rotator" id="statsRotator" aria-label="Company highlights">
+  <div class="sr-pill" aria-live="polite">
+    <div class="sr-item active" data-i="0"><span class="sr-icon">🏭</span><span><span class="sr-num">26+</span>Manufacturers</span></div>
+    <div class="sr-item" data-i="1"><span class="sr-icon">💊</span><span><span class="sr-num">150+</span>Products</span></div>
+    <div class="sr-item" data-i="2"><span class="sr-icon">⭐</span><span>Best Quality</span></div>
+  </div>
+</div>
 
 <!-- HOMEPAGE BANNER CAROUSEL — full-bleed banner images (right under nav) -->
 <section class="banner-carousel" id="bannerCarousel" aria-roledescription="carousel" aria-label="Featured product ranges">
@@ -3467,6 +3518,24 @@ dropZone.addEventListener('drop', e => {
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // -------- STATS ROTATOR (pill between nav and banner) --------
+  (function statsRotator() {
+    const items = document.querySelectorAll('#statsRotator .sr-item');
+    if (items.length < 2) return;
+    let i = 0;
+    function tick() {
+      const prev = items[i];
+      i = (i + 1) % items.length;
+      const next = items[i];
+      prev.classList.remove('active');
+      prev.classList.add('exiting');
+      next.classList.add('active');
+      // Clear exiting class after transition completes
+      setTimeout(() => prev.classList.remove('exiting'), 600);
+    }
+    if (!prefersReduced) setInterval(tick, 2000);
+  })();
 
   // -------- HOMEPAGE BANNER CAROUSEL --------
   (function bannerCarousel() {
