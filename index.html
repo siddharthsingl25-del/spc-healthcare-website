@@ -1126,6 +1126,12 @@ nav .nav-links a:hover, nav .nav-links a.active { background: rgba(217,39,110,0.
 /* Body gets a soft pink tint so the gap above the banner blends with the page theme */
 body { background: #FFF1F6 !important; }
 
+/* Pull hero up: it no longer needs to clear the fixed nav (banner is above it now) */
+/* Top-align content and remove the 100vh min-height so the hero isn't padded with empty space */
+.hero { padding-top: 0 !important; align-items: flex-start !important; min-height: auto !important; }
+.hero-inner { padding-top: 36px !important; padding-bottom: 60px !important; }
+@media (max-width: 600px) { .hero-inner { padding-top: 24px !important; padding-bottom: 40px !important; } }
+
 /* ===================================================================
    HOMEPAGE BANNER CAROUSEL
    =================================================================== */
