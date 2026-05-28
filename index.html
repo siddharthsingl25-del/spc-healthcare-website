@@ -3587,7 +3587,9 @@ function goCarousel(idx) {
 function showTeam() {
   document.getElementById('mainSite').style.display = 'none';
   document.getElementById('careersPage').style.display = 'none';
+  if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
   document.getElementById('teamPage').style.display = 'block';
+  if (window.location.pathname.startsWith('/products/')) { try { history.pushState({}, '', '/'); } catch(e){} }
   if(document.getElementById('navTeam')) {
     document.getElementById('navTeam').style.color = '#fff';
     document.getElementById('navTeam').style.background = 'rgba(30,45,126,0.4)';
@@ -3604,6 +3606,8 @@ function showCareers() {
   document.getElementById('mainSite').style.display = 'none';
   document.getElementById('careersPage').style.display = 'block';
   if(document.getElementById('teamPage')) document.getElementById('teamPage').style.display = 'none';
+  if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
+  if (window.location.pathname.startsWith('/products/')) { try { history.pushState({}, '', '/'); } catch(e){} }
   if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = '#fff'; document.getElementById('navCareers').style.background = 'rgba(37,99,216,0.4)'; }
   if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3612,7 +3616,9 @@ function showCareers() {
 function showMain(anchor) {
   document.getElementById('careersPage').style.display = 'none';
   if(document.getElementById('teamPage')) document.getElementById('teamPage').style.display = 'none';
+  if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
   document.getElementById('mainSite').style.display = 'block';
+  if (window.location.pathname.startsWith('/products/')) { try { history.pushState({}, '', '/'); } catch(e){} }
   if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = ''; document.getElementById('navCareers').style.background = ''; }
   if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
   if (anchor) {
