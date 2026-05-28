@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
 <title>SPC Healthcare Pvt Ltd – B2B Pharmaceutical</title>
+<meta name="description" content="SPC Healthcare Pvt Ltd — premium B2B pharmaceutical distribution serving hospitals, distributors and retail chains across India. 159+ products, 26+ manufacturers, 10 therapy divisions. Call 7710-301-301.">
+<meta property="og:title" content="SPC Healthcare Pvt Ltd – B2B Pharmaceutical">
+<meta property="og:description" content="B2B pharmaceutical distribution across India. 159+ products from WHO-GMP certified manufacturers.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://spchealthcare.com">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 <style>
@@ -1235,6 +1241,81 @@ body { background: #FFF1F6 !important; }
   .bc-dot.active { width: 22px; }
 }
 
+/* ===================================================================
+   PRODUCT DETAIL PAGE (PDP) — full-page view at /products/<slug>
+   =================================================================== */
+#productPage { background: #FFF1F6; min-height: 100vh; padding-top: 70px; }
+@media (max-width: 600px) { #productPage { padding-top: 62px; } }
+.pdp-header { background: linear-gradient(135deg, #FFF1F6 0%, #FCE7F3 100%); padding: 28px 0 24px; border-bottom: 1px solid rgba(217,39,110,0.10); }
+.pdp-container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.pdp-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.86rem; color: #64748B; flex-wrap: wrap; }
+.pdp-breadcrumb a { color: #1E2D7E; text-decoration: none; font-weight: 600; transition: color .2s; }
+.pdp-breadcrumb a:hover { color: #D9276E; }
+.pdp-breadcrumb span.sep { color: #94A3B8; }
+.pdp-breadcrumb .pdp-current { color: #0F172A; font-weight: 700; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.pdp-main { padding: 40px 0 64px; }
+.pdp-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; margin-bottom: 56px; }
+@media (max-width: 900px) { .pdp-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+.pdp-gallery { background: #FFFFFF; border-radius: 24px; padding: 24px; border: 1.5px solid rgba(217,39,110,0.10); box-shadow: 0 12px 40px rgba(217,39,110,0.06); position: sticky; top: 90px; }
+@media (max-width: 900px) { .pdp-gallery { position: static; padding: 20px; } }
+.pdp-gallery .carousel { background: transparent; border-radius: 16px; overflow: hidden; }
+.pdp-gallery .carousel-img { height: 380px; padding: 16px; }
+@media (max-width: 600px) { .pdp-gallery .carousel-img { height: 280px; } }
+.pdp-gallery .no-img-placeholder { height: 380px; background: linear-gradient(135deg, #FFF1F6, #FCE7F3); border-radius: 16px; }
+
+.pdp-info { padding-top: 8px; }
+.pdp-cat-badge { display: inline-block; background: rgba(30,45,126,0.08); color: #1E2D7E; font-size: 0.78rem; font-weight: 700; padding: 6px 16px; border-radius: 100px; border: 1.5px solid rgba(30,45,126,0.18); margin-bottom: 16px; letter-spacing: 0.04em; }
+.pdp-name { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.2vw, 2.4rem); font-weight: 900; color: #0F172A; line-height: 1.18; margin-bottom: 14px; word-break: break-word; }
+.pdp-mfr { font-size: 0.95rem; color: #64748B; margin-bottom: 24px; }
+.pdp-mfr strong { color: #1E2D7E; font-weight: 700; }
+
+.pdp-price { display: flex; align-items: baseline; gap: 12px; padding: 18px 22px; background: linear-gradient(135deg, #1E2D7E 0%, #2D3D9A 100%); border-radius: 14px; margin-bottom: 26px; color: #fff; box-shadow: 0 8px 24px rgba(30,45,126,0.25); }
+.pdp-price-label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.65); font-weight: 600; }
+.pdp-price-value { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: #fff; }
+.pdp-price-note { font-size: 0.78rem; color: rgba(255,255,255,0.65); margin-left: auto; font-style: italic; }
+
+.pdp-quickinfo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+@media (max-width: 480px) { .pdp-quickinfo { grid-template-columns: 1fr 1fr; } }
+.pdp-qi { background: #FFFFFF; border: 1.5px solid rgba(217,39,110,0.10); border-radius: 12px; padding: 14px 16px; }
+.pdp-qi span { display: block; font-size: 0.7rem; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.pdp-qi strong { display: block; font-size: 0.88rem; color: #0F172A; font-weight: 700; }
+
+.pdp-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.pdp-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 22px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all .25s; flex: 1; min-width: 180px; min-height: 48px; }
+.pdp-cta.primary { background: linear-gradient(135deg, #1E2D7E, #3B4FCB); color: #fff; box-shadow: 0 6px 18px rgba(30,45,126,0.30); }
+.pdp-cta.primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(30,45,126,0.45); }
+.pdp-cta.secondary { background: #25D366; color: #fff; box-shadow: 0 6px 18px rgba(37,211,102,0.30); }
+.pdp-cta.secondary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,0.45); background: #1ebe5a; }
+
+.pdp-sections { display: flex; flex-direction: column; gap: 28px; }
+.pdp-section { background: #FFFFFF; border: 1.5px solid rgba(217,39,110,0.08); border-radius: 18px; padding: 28px 30px; box-shadow: 0 4px 18px rgba(217,39,110,0.04); }
+@media (max-width: 600px) { .pdp-section { padding: 22px 22px; } }
+.pdp-section h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.pdp-section h2::before { content: ''; width: 4px; height: 22px; background: linear-gradient(180deg, #D9276E, #1E2D7E); border-radius: 2px; }
+.pdp-section p, .pdp-composition { font-size: 0.96rem; color: #475569; line-height: 1.75; }
+.pdp-composition { background: linear-gradient(135deg, #FFF1F6, #FCE7F3); padding: 16px 18px; border-radius: 10px; border-left: 4px solid #D9276E; color: #0F172A; font-weight: 500; }
+
+.pdp-uses { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.pdp-uses li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.96rem; color: #0F172A; line-height: 1.6; }
+.pdp-uses li::before { content: '✓'; flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: rgba(30,45,126,0.10); color: #1E2D7E; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.82rem; margin-top: 1px; }
+
+.pdp-related h2 { margin-bottom: 18px; }
+.pdp-related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.pdp-rel-card { background: linear-gradient(135deg, #FFF1F6, #FCE7F3); border: 1.5px solid rgba(217,39,110,0.12); border-radius: 14px; padding: 18px; text-decoration: none; display: block; transition: all .3s cubic-bezier(.2,.9,.3,1.1); position: relative; overflow: hidden; }
+.pdp-rel-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #D9276E, #1E2D7E); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+.pdp-rel-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(217,39,110,0.15); border-color: rgba(30,45,126,0.30); }
+.pdp-rel-card:hover::before { transform: scaleX(1); }
+.pdp-rel-cat { font-size: 0.66rem; font-weight: 700; color: #1E2D7E; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.pdp-rel-name { font-family: 'Playfair Display', serif; font-size: 0.96rem; font-weight: 700; color: #0F172A; margin-bottom: 6px; line-height: 1.3; }
+.pdp-rel-comp { font-size: 0.78rem; color: #64748B; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* PDP back arrow / quick nav */
+.pdp-back { display: inline-flex; align-items: center; gap: 6px; color: #1E2D7E; text-decoration: none; font-weight: 600; font-size: 0.88rem; margin-bottom: 10px; transition: color .2s; }
+.pdp-back:hover { color: #D9276E; }
+.pdp-back span { font-size: 1.1rem; }
+
 </style>
 </head>
 <body>
@@ -2354,6 +2435,82 @@ body { background: #FFF1F6 !important; }
 
 </div><!-- end careersPage -->
 
+<!-- PRODUCT DETAIL PAGE — shows at /products/<slug> -->
+<div id="productPage" style="display:none;">
+  <section class="pdp-header">
+    <div class="pdp-container">
+      <a href="/" class="pdp-back" onclick="goHome(); return false;"><span>←</span> Back to all products</a>
+      <nav class="pdp-breadcrumb" aria-label="Breadcrumb">
+        <a href="/" onclick="goHome(); return false;">Home</a>
+        <span class="sep">›</span>
+        <a href="/#categories" onclick="goHomeToCategory(); return false;" id="pdpBreadcrumbCat">Products</a>
+        <span class="sep">›</span>
+        <span class="pdp-current" id="pdpBreadcrumbName">Product</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="pdp-main">
+    <div class="pdp-container">
+      <div class="pdp-grid">
+
+        <div class="pdp-gallery">
+          <div id="pdpCarousel"></div>
+        </div>
+
+        <div class="pdp-info">
+          <span class="pdp-cat-badge" id="pdpCat">Category</span>
+          <h1 class="pdp-name" id="pdpName">Product Name</h1>
+          <p class="pdp-mfr">Manufactured by <strong id="pdpMfr">—</strong></p>
+
+          <div class="pdp-price" id="pdpMrpRow" style="display:none;">
+            <span class="pdp-price-label">MRP</span>
+            <span class="pdp-price-value" id="pdpMrp">₹0</span>
+            <span class="pdp-price-note">B2B pricing on enquiry</span>
+          </div>
+
+          <div class="pdp-quickinfo">
+            <div class="pdp-qi"><span>Packing</span><strong id="pdpPack">—</strong></div>
+            <div class="pdp-qi"><span>Division</span><strong id="pdpDiv">—</strong></div>
+            <div class="pdp-qi"><span>Type</span><strong id="pdpType">—</strong></div>
+          </div>
+
+          <div class="pdp-cta-row">
+            <a href="tel:7710301301" class="pdp-cta primary">📞 Call for B2B Pricing</a>
+            <a id="pdpWa" href="https://wa.me/917710301301" target="_blank" rel="noopener noreferrer" class="pdp-cta secondary">💬 WhatsApp Enquiry</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pdp-sections">
+
+        <section class="pdp-section">
+          <h2>Composition</h2>
+          <div class="pdp-composition" id="pdpComp">—</div>
+        </section>
+
+        <section class="pdp-section">
+          <h2>Benefits & Uses</h2>
+          <ul class="pdp-uses" id="pdpUses"></ul>
+        </section>
+
+        <section class="pdp-section">
+          <h2>Storage & General Information</h2>
+          <p id="pdpStorage">—</p>
+        </section>
+
+        <section class="pdp-section pdp-related">
+          <h2>Related Products</h2>
+          <div class="pdp-related-grid" id="pdpRelated"></div>
+        </section>
+
+      </div>
+
+    </div>
+  </section>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p>© 2026 <strong>SPC Healthcare Pvt Ltd</strong>. All Rights Reserved. | B2B Pharmaceutical Distribution | Ludhiana, Punjab</p>
@@ -2978,7 +3135,9 @@ function renderProducts() {
     const imgHtml = imgs.length > 0
       ? `<div class="plc-img"><img data-src="${proxied}" data-fallback="${original}" referrerpolicy="no-referrer" alt="${p.name}" class="lazy-img" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;}else{this.parentElement.innerHTML='&lt;span class=plc-no-img&gt;💊&lt;/span&gt;';}"/></div>`
       : `<div class="plc-img"><span class="plc-no-img">💊</span></div>`;
-    return `<div class="product-list-card" onclick="openModal(${PRODUCTS.indexOf(p)})">
+    const idx = PRODUCTS.indexOf(p);
+    const slug = productSlug(p.name);
+    return `<a class="product-list-card" href="/products/${slug}" onclick="navToProduct(${idx}); return false;" aria-label="View ${p.name.replace(/"/g,'&quot;')}" style="text-decoration:none;color:inherit;">
       ${imgHtml}
       <div class="plc-body">
         <span class="plc-cat-badge">${CAT_ICONS[p.category]||'💊'} ${p.category}</span>
@@ -2988,7 +3147,7 @@ function renderProducts() {
           <button class="plc-btn">View Details →</button>
         </div>
       </div>
-    </div>`;
+    </a>`;
   }).join('');
 
   // IntersectionObserver lazy load images
@@ -3154,7 +3313,173 @@ function doSearch() {
 })();
 
 
+/* ============================================================
+   PRODUCT DETAIL PAGE — URL routing + page show/hide
+   ============================================================ */
+function productSlug(name) {
+  return String(name || '').toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, ' ')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+}
+function findProductBySlug(slug) {
+  if (!slug) return -1;
+  return PRODUCTS.findIndex(p => productSlug(p.name) === slug);
+}
+
+function showProductPage(idx, pushUrl) {
+  const p = PRODUCTS[idx];
+  if (!p) return false;
+  const main = document.getElementById('mainSite');
+  const team = document.getElementById('teamPage');
+  const careers = document.getElementById('careersPage');
+  const pdp = document.getElementById('productPage');
+  if (main) main.style.display = 'none';
+  if (team) team.style.display = 'none';
+  if (careers) careers.style.display = 'none';
+  if (!pdp) return false;
+  pdp.style.display = 'block';
+
+  // Populate text fields
+  document.getElementById('pdpCat').textContent = `${CAT_ICONS[p.category]||'💊'} ${p.category}`;
+  document.getElementById('pdpName').textContent = p.name;
+  document.getElementById('pdpBreadcrumbName').textContent = p.name;
+  document.getElementById('pdpBreadcrumbCat').textContent = p.category || 'Products';
+  document.getElementById('pdpMfr').textContent = p.manufacturer || 'SPC Healthcare';
+  document.getElementById('pdpPack').textContent = p.packing || '—';
+  document.getElementById('pdpDiv').textContent = p.division || 'General';
+  document.getElementById('pdpType').textContent = p.category || '—';
+  document.getElementById('pdpComp').textContent = p.composition || 'Contact us for composition details';
+
+  // MRP
+  const mrpRow = document.getElementById('pdpMrpRow');
+  if (p.mrp && String(p.mrp).trim()) {
+    document.getElementById('pdpMrp').textContent = '₹' + p.mrp;
+    mrpRow.style.display = '';
+  } else {
+    mrpRow.style.display = 'none';
+  }
+
+  // Carousel — reuse the same approach as modal
+  const imgs = getProductImages(p.name);
+  const carouselContainer = document.getElementById('pdpCarousel');
+  if (imgs.length === 0) {
+    carouselContainer.innerHTML = '<div class="no-img-placeholder" style="height:380px;"></div>';
+  } else if (imgs.length === 1) {
+    const u = proxifyImg(imgs[0], 800);
+    carouselContainer.innerHTML = `<div class="carousel"><img class="carousel-img" src="${u}" data-fallback="${imgs[0]}" alt="${p.name}" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;}else{this.parentElement.innerHTML='&lt;div class=no-img-placeholder style=height:380px&gt;&lt;/div&gt;';}"/></div>`;
+  } else {
+    const slides = imgs.map(url=>`<img class="carousel-img" src="${proxifyImg(url,800)}" data-fallback="${url}" alt="${p.name}" referrerpolicy="no-referrer" loading="lazy" decoding="async" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback)this.src=this.dataset.fallback"/>`).join('');
+    const dots = imgs.map((_,i)=>`<button class="carousel-dot ${i===0?'active':''}" onclick="goCarousel(${i})"></button>`).join('');
+    carouselContainer.innerHTML = `<div class="carousel" id="carouselMain"><div class="carousel-track" id="carouselTrack">${slides}</div><button class="carousel-btn prev" onclick="shiftCarousel(-1)">&#8249;</button><button class="carousel-btn next" onclick="shiftCarousel(1)">&#8250;</button></div><div class="carousel-dots">${dots}</div>`;
+    window._carouselIdx = 0; window._carouselMax = imgs.length;
+  }
+
+  // Uses
+  const uses = getUses(p.composition, p.category, p.division);
+  document.getElementById('pdpUses').innerHTML = uses.map(u => `<li>${u}</li>`).join('');
+
+  // Storage
+  const storage = `This is a B2B pharmaceutical product distributed by SPC Healthcare Pvt Ltd. ${p.category === 'Tablets' || p.category === 'Capsules' ? 'Store in a cool, dry place away from direct sunlight. Keep below 25°C.' : p.category === 'Syrups' || p.category === 'Oral Suspension' ? 'Store below 25°C. Shake well before use. Do not freeze.' : p.category === 'Creams & Oints' ? 'Store at room temperature. Keep tube tightly closed.' : 'Store as per manufacturer guidelines.'} For B2B orders and pricing, contact SPC Healthcare at 7710-301-301.`;
+  document.getElementById('pdpStorage').textContent = storage;
+
+  // Related products — same category, exclude self, max 6
+  const related = PRODUCTS
+    .map((other, i) => ({ p: other, i }))
+    .filter(o => o.i !== idx && o.p.category === p.category)
+    .slice(0, 6);
+  document.getElementById('pdpRelated').innerHTML = related.length
+    ? related.map(o => {
+        const slug = productSlug(o.p.name);
+        return `<a class="pdp-rel-card" href="/products/${slug}" onclick="navToProduct(${o.i}); return false;">
+          <div class="pdp-rel-cat">${o.p.category}</div>
+          <div class="pdp-rel-name">${o.p.name}</div>
+          <div class="pdp-rel-comp">${(o.p.composition || '').replace(/</g,'&lt;')}</div>
+        </a>`;
+      }).join('')
+    : '<p style="color:#64748B;font-size:0.9rem;">No related products available.</p>';
+
+  // WhatsApp pre-filled message
+  document.getElementById('pdpWa').href = `https://wa.me/917710301301?text=${encodeURIComponent('Hi SPC Healthcare, I would like to enquire about: ' + p.name + ' (' + (p.packing || '') + ')')}`;
+
+  // Update URL
+  const slug = productSlug(p.name);
+  const targetPath = '/products/' + slug;
+  if (pushUrl && window.location.pathname !== targetPath) {
+    try { history.pushState({ productSlug: slug }, '', targetPath); } catch (e) {}
+  }
+
+  // SEO: title and meta description
+  document.title = `${p.name} — ${p.composition || p.category} | SPC Healthcare`;
+  let metaDesc = document.querySelector('meta[name="description"]');
+  if (!metaDesc) {
+    metaDesc = document.createElement('meta');
+    metaDesc.name = 'description';
+    document.head.appendChild(metaDesc);
+  }
+  metaDesc.content = `${p.name}${p.composition ? ' — ' + p.composition : ''}. ${p.packing ? 'Packing: ' + p.packing + '. ' : ''}Available B2B from SPC Healthcare Pvt Ltd. Call 7710-301-301.`.slice(0, 160);
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  return true;
+}
+
+function closeProductPage() {
+  const pdp = document.getElementById('productPage');
+  const main = document.getElementById('mainSite');
+  if (pdp) pdp.style.display = 'none';
+  if (main) main.style.display = 'block';
+  document.title = 'SPC Healthcare Pvt Ltd – B2B Pharmaceutical';
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.content = 'SPC Healthcare Pvt Ltd — premium B2B pharmaceutical distribution serving hospitals, distributors and retail chains across India. 159+ products, 26+ manufacturers, 10 therapy divisions.';
+}
+
+// Helpers used by product card clicks
+function navToProduct(idx) { showProductPage(idx, true); }
+function goHome() {
+  const slug = window.location.pathname.match(/^\/products\/(.+)/);
+  if (slug) { try { history.pushState({}, '', '/'); } catch(e){} }
+  closeProductPage();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function goHomeToCategory() {
+  try { history.pushState({}, '', '/'); } catch(e){}
+  closeProductPage();
+  setTimeout(() => {
+    const el = document.getElementById('categories');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
+}
+
+// Browser back/forward
+window.addEventListener('popstate', () => { handleRoute(); });
+
+// Initial route check on load
+function handleRoute() {
+  const path = window.location.pathname;
+  const match = path.match(/^\/products\/([^\/?#]+)\/?$/i);
+  if (match) {
+    const slug = decodeURIComponent(match[1]).toLowerCase();
+    const idx = findProductBySlug(slug);
+    if (idx >= 0) {
+      showProductPage(idx, false);
+      return;
+    }
+    // Unknown slug — clean URL and go home
+    try { history.replaceState({}, '', '/'); } catch(e){}
+  }
+  closeProductPage();
+}
+// Run on initial load (after PRODUCTS array is defined — this script block runs after it)
+handleRoute();
+
 function openModal(idx) {
+  // Redirect old modal calls to the new full page (preserves backward compat with any inline onclicks)
+  return navToProduct(idx);
+}
+
+function _legacyOpenModal(idx) {
   const p = PRODUCTS[idx];
   document.getElementById('mCat').textContent = `${CAT_ICONS[p.category]||'💊'} ${p.category}`;
   document.getElementById('mName').textContent = p.name;
