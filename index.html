@@ -1219,7 +1219,7 @@ body { background: #FFF1F6 !important; }
 .bc-dot:hover { background: rgba(255,255,255,0.85); }
 
 /* Auto-rotate progress bar */
-.bc-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: #D9276E; width: 0; z-index: 5; transition: width 5s linear; }
+.bc-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: #D9276E; width: 0; z-index: 5; transition: width 2s linear; }
 .bc-progress.run { width: 100%; }
 
 /* Responsive */
@@ -3895,7 +3895,7 @@ dropZone.addEventListener('drop', e => {
     const frame = track.parentElement;
     let idx = 0;
     const total = slides.length;
-    const AUTO_MS = 5000;
+    const AUTO_MS = 2000;
     let timer = null;
     let isHover = false;
 
