@@ -1143,7 +1143,8 @@ body { background: #FFF1F6 !important; }
 /* ===================================================================
    HOMEPAGE BANNER CAROUSEL
    =================================================================== */
-.banner-carousel { position: relative; width: 100%; max-width: 100%; margin: 0 0 0; padding: 0; background: transparent; }
+.banner-carousel { position: relative; width: 100%; max-width: 100%; margin: calc(38px + 70px + 24px) 0 0; padding: 0; background: transparent; }
+@media (max-width: 600px) { .banner-carousel { margin-top: calc(32px + 60px + 16px); } }
 
 /* Stats rotator pill — sits between nav and banner, rotates every 2s */
 .stats-rotator { margin: calc(70px + 14px) 0 14px; padding: 0 16px; display: flex; justify-content: center; }
@@ -1323,9 +1324,71 @@ body { background: #FFF1F6 !important; }
 .pdp-back:hover { color: #D9276E; }
 .pdp-back span { font-size: 1.1rem; }
 
+/* ===================================================================
+   TOP ANNOUNCEMENT STRIP + WHITE NAV (Mankind-style)
+   =================================================================== */
+.top-strip { position: fixed; top: 0; left: 0; right: 0; height: 38px; background: linear-gradient(135deg, #1E2D7E 0%, #2D3D9A 100%); color: #fff; display: flex; align-items: center; justify-content: center; z-index: 1101; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.10); }
+.top-strip-item { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0; transform: translateY(8px); transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1); color: #fff; font-weight: 600; font-size: 0.84rem; letter-spacing: 0.01em; padding: 0 16px; white-space: nowrap; }
+.top-strip-item.active { opacity: 1; transform: none; }
+.top-strip-item.exiting { opacity: 0; transform: translateY(-8px); }
+.top-strip-item .ts-icon { font-size: 1rem; line-height: 1; }
+.top-strip-item .ts-num { color: #FBCFE8; font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1rem; margin-right: 4px; }
+
+/* Nav becomes white card sitting below the strip */
+nav#navbar { top: 38px !important; background: #FFFFFF !important; border-bottom: 1px solid rgba(30,45,126,0.10) !important; box-shadow: 0 2px 14px rgba(30,45,126,0.06) !important; backdrop-filter: none !important; }
+nav#navbar .nav-inner { height: 70px; }
+nav#navbar .nav-brand span:first-child { color: #0F172A !important; }
+nav#navbar .nav-brand span:last-child { color: #1E2D7E !important; opacity: 0.85; }
+nav#navbar .nav-logo img { filter: none !important; }
+nav#navbar .nav-links a { color: #0F172A !important; font-weight: 600 !important; background: transparent !important; }
+nav#navbar .nav-links a:hover { color: #D9276E !important; background: rgba(217,39,110,0.06) !important; }
+nav#navbar .nav-links a.active { color: #1E2D7E !important; background: rgba(30,45,126,0.06) !important; }
+nav#navbar .nav-menu-btn { color: #1E2D7E !important; }
+nav#navbar .nav-cta { background: #D9276E !important; color: #fff !important; box-shadow: 0 4px 14px rgba(217,39,110,0.25); }
+nav#navbar .nav-cta:hover { background: #B01F5D !important; box-shadow: 0 6px 18px rgba(217,39,110,0.35); }
+nav#navbar .nav-search-box { background: #F8FAFC !important; border-color: rgba(30,45,126,0.15) !important; }
+nav#navbar .nav-search-box input { color: #0F172A !important; }
+nav#navbar .nav-search-box input::placeholder { color: #94A3B8 !important; }
+nav#navbar .nav-search-box button { background: #1E2D7E !important; color: #fff !important; }
+nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
+
+@media (max-width: 600px) {
+  .top-strip { height: 32px; }
+  .top-strip-item { font-size: 0.74rem; gap: 8px; }
+  .top-strip-item .ts-num { font-size: 0.9rem; }
+  nav#navbar { top: 32px !important; }
+  nav#navbar .nav-inner { height: 60px; }
+}
+
+/* Mobile nav drawer now sits below strip + nav */
+.mobile-nav { top: 0 !important; padding-top: calc(38px + 70px + 18px) !important; background: #FFFFFF !important; }
+.mobile-nav a { color: #0F172A !important; border-bottom-color: rgba(30,45,126,0.08) !important; }
+.mobile-nav a:hover { background: rgba(217,39,110,0.06) !important; color: #D9276E !important; }
+@media (max-width: 600px) {
+  .mobile-nav { padding-top: calc(32px + 60px + 16px) !important; }
+}
+
+/* Hide the old stats-rotator pill since the top strip replaces it */
+.stats-rotator { display: none !important; }
+
+/* Product page offset for new strip + nav */
+#productPage { padding-top: calc(38px + 70px) !important; }
+@media (max-width: 600px) { #productPage { padding-top: calc(32px + 60px) !important; } }
+
+/* Team & Careers hero offsets */
+.tp-hero, .careers-hero { padding-top: calc(38px + 70px + 32px) !important; }
+@media (max-width: 600px) { .tp-hero, .careers-hero { padding-top: calc(32px + 60px + 24px) !important; } }
+
 </style>
 </head>
 <body>
+
+<!-- TOP ANNOUNCEMENT STRIP — rotates SPC highlights -->
+<div class="top-strip" id="topStrip" aria-live="polite">
+  <div class="top-strip-item active" data-i="0"><span class="ts-icon">🏭</span><span><span class="ts-num">26+</span>Manufacturers</span></div>
+  <div class="top-strip-item" data-i="1"><span class="ts-icon">💊</span><span><span class="ts-num">150+</span>Products</span></div>
+  <div class="top-strip-item" data-i="2"><span class="ts-icon">⭐</span><span>Best Quality</span></div>
+</div>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -3852,20 +3915,24 @@ dropZone.addEventListener('drop', e => {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // -------- STATS ROTATOR (pill between nav and banner) --------
+  // -------- STATS ROTATOR (top strip + legacy pill) --------
   (function statsRotator() {
-    const items = document.querySelectorAll('#statsRotator .sr-item');
-    if (items.length < 2) return;
+    const groups = [
+      document.querySelectorAll('#topStrip .top-strip-item'),
+      document.querySelectorAll('#statsRotator .sr-item')
+    ].filter(g => g.length >= 2);
+    if (!groups.length) return;
     let i = 0;
     function tick() {
-      const prev = items[i];
-      i = (i + 1) % items.length;
-      const next = items[i];
-      prev.classList.remove('active');
-      prev.classList.add('exiting');
-      next.classList.add('active');
-      // Clear exiting class after transition completes
-      setTimeout(() => prev.classList.remove('exiting'), 600);
+      groups.forEach(items => {
+        const prev = items[i % items.length];
+        const next = items[(i + 1) % items.length];
+        prev.classList.remove('active');
+        prev.classList.add('exiting');
+        next.classList.add('active');
+        setTimeout(() => prev.classList.remove('exiting'), 600);
+      });
+      i++;
     }
     if (!prefersReduced) setInterval(tick, 2000);
   })();
