@@ -2652,7 +2652,7 @@ function rewriteStaticImages() {
     if (cls.includes('mfr-pcard-logo')) return 320;
     if (cls.includes('dir-avatar') || cls.includes('tp-founder-avatar')) return 280;
     if (cls.includes('carousel-img')) return 800;
-    if (cls.includes('bc-bg')) return 1400;
+    if (cls.includes('bc-bg')) return 2400;
     if (cls.includes('plc-img') || cls.includes('lazy-img')) return 420;
     // Detect by parent
     const parent = img.parentElement;
@@ -2669,9 +2669,12 @@ function rewriteStaticImages() {
     const src = img.getAttribute('src');
     const dataSrc = img.getAttribute('data-src');
     const w = widthFor(img);
+    // Higher quality for banner images (preserves sharpness on retina displays)
+    const isBanner = (img.className || '').includes('bc-bg');
+    const q = isBanner ? 92 : 78;
     if (src && /i\.ibb\.co/.test(src) && !src.includes('wsrv.nl')) {
       img.dataset.originalSrc = src;
-      img.setAttribute('src', proxifyImg(src, w));
+      img.setAttribute('src', proxifyImg(src, w, q));
       img.addEventListener('error', function handler() {
         if (this.dataset.originalSrc && this.src !== this.dataset.originalSrc) {
           this.removeEventListener('error', handler);
@@ -2681,7 +2684,7 @@ function rewriteStaticImages() {
     }
     if (dataSrc && /i\.ibb\.co/.test(dataSrc) && !dataSrc.includes('wsrv.nl')) {
       img.dataset.originalSrc = dataSrc;
-      img.setAttribute('data-src', proxifyImg(dataSrc, w));
+      img.setAttribute('data-src', proxifyImg(dataSrc, w, q));
     }
     // Default attributes for performance
     if (!img.hasAttribute('loading') && !img.classList.contains('lazy-img')) {
