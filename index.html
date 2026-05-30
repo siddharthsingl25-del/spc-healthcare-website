@@ -1331,6 +1331,46 @@ body.viewing-products #categories { display: block !important; margin-top: calc(
 body.viewing-products #categories .section-inner { padding-top: 32px; }
 @media (max-width: 600px) { body.viewing-products #categories { margin-top: calc(32px + 60px); } body.viewing-products #categories .section-inner { padding-top: 24px; } }
 
+/* ===================================================================
+   MOBILE-FRIENDLY POLISH (top strip, PDP, products panel, etc.)
+   =================================================================== */
+@media (max-width: 600px) {
+  /* Top strip: slightly larger text for readability on small phones */
+  .top-strip-item { font-size: 0.78rem; }
+  .top-strip-item .ts-num { font-size: 0.95rem; }
+  .top-strip-item .ts-icon { font-size: 1rem; }
+  /* PDP: tighter padding, better stacking */
+  .pdp-name { font-size: clamp(1.35rem, 5.5vw, 1.7rem); }
+  .pdp-price { padding: 14px 18px; gap: 8px; flex-wrap: wrap; }
+  .pdp-price-value { font-size: 1.4rem; }
+  .pdp-price-note { font-size: 0.7rem; margin-left: 0; width: 100%; margin-top: 2px; }
+  .pdp-quickinfo { gap: 8px; }
+  .pdp-qi { padding: 12px 14px; }
+  .pdp-qi span { font-size: 0.64rem; }
+  .pdp-qi strong { font-size: 0.82rem; }
+  /* PDP CTAs: stack vertically on phone for easier tapping */
+  .pdp-cta-row { flex-direction: column; gap: 10px; }
+  .pdp-cta { width: 100%; min-width: 0; padding: 14px 18px; }
+  .pdp-section { padding: 20px 18px; }
+  .pdp-section h2 { font-size: 1.1rem; }
+  .pdp-section p, .pdp-composition { font-size: 0.9rem; }
+  .pdp-uses li { font-size: 0.9rem; }
+  .pdp-related-grid { grid-template-columns: 1fr; gap: 10px; }
+  /* Product panel: title was getting too big */
+  #products .section-title { font-size: 1.15rem !important; }
+  #products button[onclick*="closePanel"] { padding: 8px 12px; font-size: 0.78rem; }
+  /* Breadcrumb on PDP — allow wrapping */
+  .pdp-breadcrumb { font-size: 0.78rem; gap: 6px; }
+  .pdp-breadcrumb .pdp-current { white-space: normal; line-clamp: 2; -webkit-line-clamp: 2; }
+}
+@media (max-width: 380px) {
+  /* Very small phones */
+  .pdp-quickinfo { grid-template-columns: 1fr 1fr; }
+  .pdp-qi:nth-child(3) { grid-column: 1 / -1; }
+  .top-strip-item { font-size: 0.72rem; }
+  .top-strip-item .ts-num { font-size: 0.88rem; }
+}
+
 /* Products page banner carousel */
 .pp-banner-carousel { width: 100%; max-width: 1280px; margin: 32px auto 0; padding: 0 24px; }
 .pp-frame { position: relative; aspect-ratio: 2045 / 740; overflow: hidden; border-radius: 18px; box-shadow: 0 12px 40px rgba(217,39,110,0.10); background: #1E2D7E; }
@@ -3188,7 +3228,14 @@ function filterByCategory(cat) {
   panel.classList.remove('panel-enter');
   void panel.offsetWidth;
   panel.classList.add('panel-enter');
-  setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'start'}), 50);
+  // Scroll with offset for fixed top strip + nav (so panel header isn't hidden)
+  setTimeout(() => {
+    const stripH = (window.innerWidth <= 600) ? 32 : 38;
+    const navH = (window.innerWidth <= 600) ? 60 : 70;
+    const offset = stripH + navH + 12;
+    const top = panel.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, 50);
 }
 
 function closePanel() {
@@ -3319,7 +3366,14 @@ function doSearch() {
   panel.classList.remove('panel-enter');
   void panel.offsetWidth;
   panel.classList.add('panel-enter');
-  setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'start'}), 50);
+  // Scroll with offset for fixed top strip + nav (so panel header isn't hidden)
+  setTimeout(() => {
+    const stripH = (window.innerWidth <= 600) ? 32 : 38;
+    const navH = (window.innerWidth <= 600) ? 60 : 70;
+    const offset = stripH + navH + 12;
+    const top = panel.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, 50);
 }
 
 
