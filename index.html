@@ -1451,28 +1451,28 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
         <img class="bc-bg" src="https://i.ibb.co/S4Pv5QWs/heal-banner-upscaled.png" alt="HEAL — Better Health, Brighter Tomorrow — SPC Healthcare" loading="eager" fetchpriority="high">
       </a>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="1" aria-label="View our pediatric range">
-        <img class="bc-bg" src="https://i.ibb.co/N6Sd4gkm/MOTHER-CHILD-BANNER-UPSCALED-1.png" alt="SPC Healthcare — Secure, Pure & Cure" loading="eager" fetchpriority="high">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="1" aria-label="Featured product range">
+        <img class="bc-bg" src="https://i.ibb.co/hR0srr2Z/Untitled-design-77.png" alt="SPC Healthcare — Featured Range" loading="eager" fetchpriority="high">
       </a>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="2" aria-label="View our gynae range">
-        <img class="bc-bg" src="https://i.ibb.co/xKN0Kx1R/gynae-banner-upscaled.png" alt="Women's Healthcare Range" loading="eager" fetchpriority="high">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="2" aria-label="Featured product range">
+        <img class="bc-bg" src="https://i.ibb.co/mFrNSd9V/Untitled-design-78.png" alt="SPC Healthcare — Featured Range" loading="eager" fetchpriority="high">
       </a>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="3" aria-label="View our orthopedic range">
-        <img class="bc-bg" src="https://i.ibb.co/JRQsgTpf/ortho-banner-upscaled.png" alt="Stronger Joints, Happier Lives" loading="eager">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="3" aria-label="Featured product range">
+        <img class="bc-bg" src="https://i.ibb.co/7t1c39cY/Untitled-design-79.png" alt="SPC Healthcare — Featured Range" loading="eager">
       </a>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="4" aria-label="View our bone health range">
-        <img class="bc-bg" src="https://i.ibb.co/5hYSYFg4/lady-strong-bones-upscaled.png" alt="Strong Bones, Stronger You" loading="eager">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="4" aria-label="Featured product range">
+        <img class="bc-bg" src="https://i.ibb.co/SDgFmfjN/Untitled-design-80.png" alt="SPC Healthcare — Featured Range" loading="eager">
       </a>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="5" aria-label="View our adult care range">
-        <img class="bc-bg" src="https://i.ibb.co/9XKYkrQ/adults-upscaled.png" alt="Strong Immunity, Stronger You" loading="eager">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="5" aria-label="Featured product range">
+        <img class="bc-bg" src="https://i.ibb.co/v0D8qJf/Untitled-design-81.png" alt="SPC Healthcare — Featured Range" loading="eager">
       </a>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="6" aria-label="View our kids range">
-        <img class="bc-bg" src="https://i.ibb.co/9kGBjff2/kida-upscaled.png" alt="Pediatric & Kids Care Range" loading="eager">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="6" aria-label="Featured product range">
+        <img class="bc-bg" src="https://i.ibb.co/nqS9Q3Jj/Untitled-design-82.png" alt="SPC Healthcare — Featured Range" loading="eager">
       </a>
 
     </div>
@@ -2657,7 +2657,7 @@ function rewriteStaticImages() {
     if (cls.includes('mfr-pcard-logo')) return 320;
     if (cls.includes('dir-avatar') || cls.includes('tp-founder-avatar')) return 280;
     if (cls.includes('carousel-img')) return 800;
-    if (cls.includes('bc-bg')) return 2400;
+    if (cls.includes('bc-bg')) return 2800;
     if (cls.includes('plc-img') || cls.includes('lazy-img')) return 420;
     // Detect by parent
     const parent = img.parentElement;
@@ -2676,7 +2676,7 @@ function rewriteStaticImages() {
     const w = widthFor(img);
     // Higher quality for banner images (preserves sharpness on retina displays)
     const isBanner = (img.className || '').includes('bc-bg');
-    const q = isBanner ? 92 : 78;
+    const q = isBanner ? 95 : 78;
     if (src && /i\.ibb\.co/.test(src) && !src.includes('wsrv.nl')) {
       img.dataset.originalSrc = src;
       img.setAttribute('src', proxifyImg(src, w, q));
