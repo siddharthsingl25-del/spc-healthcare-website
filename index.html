@@ -1325,6 +1325,14 @@ body { background: #FFF1F6 !important; }
 .pdp-back span { font-size: 1.1rem; }
 
 /* ===================================================================
+   PRODUCTS LISTING PAGE — when /products URL is active
+   Hides banner, hero, partners, why, about, contact so only categories show
+   =================================================================== */
+body.viewing-products #mainSite > section:not(#categories):not(#products) { display: none !important; }
+body.viewing-products #categories { display: block !important; margin-top: calc(38px + 70px); }
+@media (max-width: 600px) { body.viewing-products #categories { margin-top: calc(32px + 60px); } }
+
+/* ===================================================================
    TOP ANNOUNCEMENT STRIP + WHITE NAV (Mankind-style)
    =================================================================== */
 .top-strip { position: fixed; top: 0; left: 0; right: 0; height: 38px; background: linear-gradient(135deg, #1E2D7E 0%, #2D3D9A 100%); color: #fff; display: flex; align-items: center; justify-content: center; z-index: 1101; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.10); }
@@ -3408,6 +3416,7 @@ function showProductPage(idx, pushUrl) {
   const team = document.getElementById('teamPage');
   const careers = document.getElementById('careersPage');
   const pdp = document.getElementById('productPage');
+  document.body.classList.remove('viewing-products');
   if (main) main.style.display = 'none';
   if (team) team.style.display = 'none';
   if (careers) careers.style.display = 'none';
@@ -3531,6 +3540,12 @@ window.addEventListener('popstate', () => { handleRoute(); });
 // Initial route check on load
 function handleRoute() {
   const path = window.location.pathname;
+  // Products listing page (/products)
+  if (path === '/products' || path === '/products/') {
+    showProducts(null, false);
+    return;
+  }
+  // Product detail page (/products/<slug>)
   const match = path.match(/^\/products\/([^\/?#]+)\/?$/i);
   if (match) {
     const slug = decodeURIComponent(match[1]).toLowerCase();
@@ -3663,11 +3678,12 @@ function goCarousel(idx) {
 
 // ===== TEAM PAGE SWITCHER =====
 function showTeam() {
+  document.body.classList.remove('viewing-products');
   document.getElementById('mainSite').style.display = 'none';
   document.getElementById('careersPage').style.display = 'none';
   if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
   document.getElementById('teamPage').style.display = 'block';
-  if (window.location.pathname.startsWith('/products/')) { try { history.pushState({}, '', '/'); } catch(e){} }
+  if (window.location.pathname.startsWith('/products')) { try { history.pushState({}, '', '/'); } catch(e){} }
   if(document.getElementById('navTeam')) {
     document.getElementById('navTeam').style.color = '#fff';
     document.getElementById('navTeam').style.background = 'rgba(30,45,126,0.4)';
@@ -3681,41 +3697,54 @@ function showTeam() {
 
 // ===== PAGE SWITCHER =====
 function showCareers() {
+  document.body.classList.remove('viewing-products');
   document.getElementById('mainSite').style.display = 'none';
   document.getElementById('careersPage').style.display = 'block';
   if(document.getElementById('teamPage')) document.getElementById('teamPage').style.display = 'none';
   if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
-  if (window.location.pathname.startsWith('/products/')) { try { history.pushState({}, '', '/'); } catch(e){} }
+  if (window.location.pathname.startsWith('/products')) { try { history.pushState({}, '', '/'); } catch(e){} }
   if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = '#fff'; document.getElementById('navCareers').style.background = 'rgba(37,99,216,0.4)'; }
   if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Reveal the Product Categories section (hidden by default) and scroll to it
-function showProducts(ev) {
-  if (ev) ev.preventDefault();
-  // Make sure we're on the main homepage (close team/careers/product detail)
+function showProducts(ev, pushUrl) {
+  if (ev && ev.preventDefault) ev.preventDefault();
+  if (pushUrl === undefined) pushUrl = true;
+  // Close other pages
   document.getElementById('careersPage').style.display = 'none';
   if(document.getElementById('teamPage')) document.getElementById('teamPage').style.display = 'none';
   if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
   document.getElementById('mainSite').style.display = 'block';
-  if (window.location.pathname.startsWith('/products/')) { try { history.pushState({}, '', '/'); } catch(e){} }
-  if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = ''; document.getElementById('navCareers').style.background = ''; }
-  if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
-  // Reveal categories
+  // Activate products-only view (CSS hides banner/hero/partners/about/contact)
+  document.body.classList.add('viewing-products');
+  // Reveal categories within
   const cats = document.getElementById('categories');
   if (cats) cats.style.display = '';
-  // Scroll to it
-  setTimeout(() => { if (cats) cats.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
+  // Reset other nav highlights
+  if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = ''; document.getElementById('navCareers').style.background = ''; }
+  if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
+  // Update URL for shareable link
+  if (pushUrl && window.location.pathname !== '/products') {
+    try { history.pushState({ view: 'products' }, '', '/products'); } catch(e){}
+  }
+  // SEO title + meta
+  document.title = 'Products | SPC Healthcare Pvt Ltd';
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.content = 'Browse SPC Healthcare\'s 159+ pharmaceutical products across 10 therapy divisions — Tablets, Capsules, Syrups, Oral Drops, Creams and more. B2B distribution across India.';
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   return false;
 }
 
 function showMain(anchor) {
+  document.body.classList.remove('viewing-products');
   document.getElementById('careersPage').style.display = 'none';
   if(document.getElementById('teamPage')) document.getElementById('teamPage').style.display = 'none';
   if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
   document.getElementById('mainSite').style.display = 'block';
-  if (window.location.pathname.startsWith('/products/')) { try { history.pushState({}, '', '/'); } catch(e){} }
+  if (window.location.pathname.startsWith('/products')) { try { history.pushState({}, '', '/'); } catch(e){} }
   if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = ''; document.getElementById('navCareers').style.background = ''; }
   if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
   // When going Home (no anchor), hide categories again to keep homepage clean
