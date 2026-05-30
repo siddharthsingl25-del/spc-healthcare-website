@@ -1401,7 +1401,7 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
       </div>
     </a>
     <div class="nav-links">
-      <a href="#hero" class="active" onclick="showMain()">Home</a>
+      <a href="/" class="active" onclick="showMain();return false;">Home</a>
       <a href="#categories" onclick="return showProducts(event)">Products</a>
       <a href="#about" onclick="showMain()">About Us</a>
       <a href="#" onclick="showTeam();return false;" id="navTeam">Our Team</a>
@@ -1422,7 +1422,7 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
-  <a href="#hero" onclick="showMain();toggleMobileNav()">🏠 Home</a>
+  <a href="/" onclick="showMain();toggleMobileNav();return false;">🏠 Home</a>
   <a href="#categories" onclick="showProducts(event);toggleMobileNav();return false;">💊 Products</a>
   <a href="#about" onclick="showMain();toggleMobileNav()">ℹ️ About Us</a>
   <a href="#" onclick="showTeam();toggleMobileNav();return false;">👥 Our Team</a>
@@ -3718,6 +3718,11 @@ function showMain(anchor) {
   if (window.location.pathname.startsWith('/products/')) { try { history.pushState({}, '', '/'); } catch(e){} }
   if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = ''; document.getElementById('navCareers').style.background = ''; }
   if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
+  // When going Home (no anchor), hide categories again to keep homepage clean
+  if (!anchor) {
+    const cats = document.getElementById('categories');
+    if (cats) cats.style.display = 'none';
+  }
   if (anchor) {
     setTimeout(() => {
       const el = document.getElementById(anchor);
