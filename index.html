@@ -1402,7 +1402,7 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
     </a>
     <div class="nav-links">
       <a href="#hero" class="active" onclick="showMain()">Home</a>
-      <a href="#categories" onclick="showMain()">Products</a>
+      <a href="#categories" onclick="return showProducts(event)">Products</a>
       <a href="#about" onclick="showMain()">About Us</a>
       <a href="#" onclick="showTeam();return false;" id="navTeam">Our Team</a>
       <a href="#" onclick="showCareers();return false;" id="navCareers">Careers</a>
@@ -1423,7 +1423,7 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
   <a href="#hero" onclick="showMain();toggleMobileNav()">🏠 Home</a>
-  <a href="#categories" onclick="showMain();toggleMobileNav()">💊 Products</a>
+  <a href="#categories" onclick="showProducts(event);toggleMobileNav();return false;">💊 Products</a>
   <a href="#about" onclick="showMain();toggleMobileNav()">ℹ️ About Us</a>
   <a href="#" onclick="showTeam();toggleMobileNav();return false;">👥 Our Team</a>
   <a href="#" onclick="showCareers();toggleMobileNav();return false;">💼 Careers</a>
@@ -1447,31 +1447,31 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
   <div class="bc-frame">
     <div class="bc-track" id="bcTrack">
 
-      <a class="bc-slide" href="#categories" data-slide="0" aria-label="Better Health, Brighter Tomorrow">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="0" aria-label="Better Health, Brighter Tomorrow">
         <img class="bc-bg" src="https://i.ibb.co/S4Pv5QWs/heal-banner-upscaled.png" alt="HEAL — Better Health, Brighter Tomorrow — SPC Healthcare" loading="eager" fetchpriority="high">
       </a>
 
-      <a class="bc-slide" href="#categories" data-slide="1" aria-label="View our pediatric range">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="1" aria-label="View our pediatric range">
         <img class="bc-bg" src="https://i.ibb.co/N6Sd4gkm/MOTHER-CHILD-BANNER-UPSCALED-1.png" alt="SPC Healthcare — Secure, Pure & Cure" loading="eager" fetchpriority="high">
       </a>
 
-      <a class="bc-slide" href="#categories" data-slide="2" aria-label="View our gynae range">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="2" aria-label="View our gynae range">
         <img class="bc-bg" src="https://i.ibb.co/xKN0Kx1R/gynae-banner-upscaled.png" alt="Women's Healthcare Range" loading="eager" fetchpriority="high">
       </a>
 
-      <a class="bc-slide" href="#categories" data-slide="3" aria-label="View our orthopedic range">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="3" aria-label="View our orthopedic range">
         <img class="bc-bg" src="https://i.ibb.co/JRQsgTpf/ortho-banner-upscaled.png" alt="Stronger Joints, Happier Lives" loading="eager">
       </a>
 
-      <a class="bc-slide" href="#categories" data-slide="4" aria-label="View our bone health range">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="4" aria-label="View our bone health range">
         <img class="bc-bg" src="https://i.ibb.co/5hYSYFg4/lady-strong-bones-upscaled.png" alt="Strong Bones, Stronger You" loading="eager">
       </a>
 
-      <a class="bc-slide" href="#categories" data-slide="5" aria-label="View our adult care range">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="5" aria-label="View our adult care range">
         <img class="bc-bg" src="https://i.ibb.co/9XKYkrQ/adults-upscaled.png" alt="Strong Immunity, Stronger You" loading="eager">
       </a>
 
-      <a class="bc-slide" href="#categories" data-slide="6" aria-label="View our kids range">
+      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="6" aria-label="View our kids range">
         <img class="bc-bg" src="https://i.ibb.co/9kGBjff2/kida-upscaled.png" alt="Pediatric & Kids Care Range" loading="eager">
       </a>
 
@@ -1543,7 +1543,7 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
       <h1 class="hero-title">Your Trusted Partner in <span class="accent">Healthcare Solutions</span></h1>
       <p class="hero-subtitle">SPC Healthcare Pvt Ltd connects manufacturers and distributors with a wide range of high-quality pharmaceutical products — from pediatric care to orthopedic therapies.</p>
       <div class="hero-btns">
-        <a href="#categories" class="btn-primary">💊 Explore Products</a>
+        <a href="#categories" class="btn-primary" onclick="return showProducts(event)">💊 Explore Products</a>
         <a href="#contact" class="btn-outline">📞 Contact Us</a>
       </div>
       <div class="hero-stats reveal-stagger">
@@ -1575,7 +1575,7 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
 
 
 <!-- CATEGORIES -->
-<section class="categories-section" id="categories">
+<section class="categories-section" id="categories" style="display:none;">
   <div class="section-inner">
     <div class="section-header reveal">
       <span class="section-tag">Browse by Type</span>
@@ -2509,7 +2509,7 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
 <div id="productPage" style="display:none;">
   <section class="pdp-header">
     <div class="pdp-container">
-      <a href="/" class="pdp-back" onclick="goHome(); return false;"><span>←</span> Back to all products</a>
+      <a href="/#categories" class="pdp-back" onclick="showProducts(); return false;"><span>←</span> Back to all products</a>
       <nav class="pdp-breadcrumb" aria-label="Breadcrumb">
         <a href="/" onclick="goHome(); return false;">Home</a>
         <span class="sep">›</span>
@@ -3519,10 +3519,10 @@ function goHome() {
 function goHomeToCategory() {
   try { history.pushState({}, '', '/'); } catch(e){}
   closeProductPage();
-  setTimeout(() => {
-    const el = document.getElementById('categories');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 50);
+  // Reveal categories section (it's hidden by default on the homepage)
+  const cats = document.getElementById('categories');
+  if (cats) cats.style.display = '';
+  setTimeout(() => { if (cats) cats.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80);
 }
 
 // Browser back/forward
@@ -3689,6 +3689,25 @@ function showCareers() {
   if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = '#fff'; document.getElementById('navCareers').style.background = 'rgba(37,99,216,0.4)'; }
   if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Reveal the Product Categories section (hidden by default) and scroll to it
+function showProducts(ev) {
+  if (ev) ev.preventDefault();
+  // Make sure we're on the main homepage (close team/careers/product detail)
+  document.getElementById('careersPage').style.display = 'none';
+  if(document.getElementById('teamPage')) document.getElementById('teamPage').style.display = 'none';
+  if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
+  document.getElementById('mainSite').style.display = 'block';
+  if (window.location.pathname.startsWith('/products/')) { try { history.pushState({}, '', '/'); } catch(e){} }
+  if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = ''; document.getElementById('navCareers').style.background = ''; }
+  if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
+  // Reveal categories
+  const cats = document.getElementById('categories');
+  if (cats) cats.style.display = '';
+  // Scroll to it
+  setTimeout(() => { if (cats) cats.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
+  return false;
 }
 
 function showMain(anchor) {
