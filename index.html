@@ -1190,10 +1190,8 @@ body { background: #FFF1F6 !important; }
 @keyframes srShine { 0%{left:-100%;} 60%{left:120%;} 100%{left:120%;} }
 .bc-frame { position: relative; border-radius: 0; overflow: hidden; box-shadow: 0 12px 40px rgba(30,45,126,0.10); background: #1E2D7E; aspect-ratio: 2045 / 740; }
 .bc-track { display: flex; height: 100%; width: 100%; transition: transform .7s cubic-bezier(.65,.05,.2,1); }
-.bc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: block; overflow: hidden; text-decoration: none; cursor: pointer; }
+.bc-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: block; overflow: hidden; text-decoration: none; cursor: default; }
 .bc-slide img, .bc-slide .bc-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: block; }
-.bc-slide:hover img { transform: scale(1.02); }
-.bc-slide img { transition: transform .8s cubic-bezier(.2,.7,.2,1); }
 .bc-content { position: relative; z-index: 3; padding: 48px 60px; max-width: 640px; color: #fff; width: 100%; }
 .bc-eyebrow { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #FBCFE8; background: rgba(217,39,110,0.20); border: 1px solid rgba(251,207,232,0.40); padding: 6px 14px; border-radius: 100px; margin-bottom: 16px; }
 .bc-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 900; line-height: 1.15; margin-bottom: 14px; color: #fff; }
@@ -1222,7 +1220,7 @@ body { background: #FFF1F6 !important; }
 .bc-dot:hover { background: rgba(255,255,255,0.85); }
 
 /* Auto-rotate progress bar */
-.bc-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: #D9276E; width: 0; z-index: 5; transition: width 2s linear; }
+.bc-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: #D9276E; width: 0; z-index: 5; transition: width 3s linear; }
 .bc-progress.run { width: 100%; }
 
 /* Responsive */
@@ -1337,13 +1335,12 @@ body.viewing-products #categories .section-inner { padding-top: 32px; }
 .pp-banner-carousel { width: 100%; max-width: 1280px; margin: 32px auto 0; padding: 0 24px; }
 .pp-frame { position: relative; aspect-ratio: 2045 / 740; overflow: hidden; border-radius: 18px; box-shadow: 0 12px 40px rgba(217,39,110,0.10); background: #1E2D7E; }
 .pp-track { display: flex; height: 100%; transition: transform .7s cubic-bezier(.65,.05,.2,1); }
-.pp-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: block; cursor: pointer; text-decoration: none; overflow: hidden; }
-.pp-slide:hover .pp-img { transform: scale(1.02); }
-.pp-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.pp-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: block; cursor: default; text-decoration: none; overflow: hidden; }
+.pp-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pp-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 8px; padding: 6px 12px; background: rgba(15,23,42,0.40); border-radius: 100px; backdrop-filter: blur(6px); }
 .pp-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.55); border: none; cursor: pointer; padding: 0; transition: all .22s; }
 .pp-dot.active { background: #fff; width: 24px; border-radius: 100px; }
-.pp-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: #D9276E; width: 0; z-index: 5; transition: width 2s linear; }
+.pp-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: #D9276E; width: 0; z-index: 5; transition: width 3s linear; }
 .pp-progress.run { width: 100%; }
 @media (max-width: 600px) {
   .pp-banner-carousel { padding: 0 16px; margin-top: 20px; }
@@ -1476,33 +1473,33 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
   <div class="bc-frame">
     <div class="bc-track" id="bcTrack">
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="0" aria-label="Better Health, Brighter Tomorrow">
+      <div class="bc-slide" data-slide="0" aria-label="Better Health, Brighter Tomorrow">
         <img class="bc-bg" src="https://i.ibb.co/S4Pv5QWs/heal-banner-upscaled.png" alt="HEAL — Better Health, Brighter Tomorrow — SPC Healthcare" loading="eager" fetchpriority="high">
-      </a>
+      </div>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="1" aria-label="Featured product range">
+      <div class="bc-slide" data-slide="1" aria-label="Featured product range">
         <img class="bc-bg" src="https://i.ibb.co/hR0srr2Z/Untitled-design-77.png" alt="SPC Healthcare — Featured Range" loading="eager" fetchpriority="high">
-      </a>
+      </div>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="2" aria-label="Featured product range">
+      <div class="bc-slide" data-slide="2" aria-label="Featured product range">
         <img class="bc-bg" src="https://i.ibb.co/mFrNSd9V/Untitled-design-78.png" alt="SPC Healthcare — Featured Range" loading="eager" fetchpriority="high">
-      </a>
+      </div>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="3" aria-label="Featured product range">
+      <div class="bc-slide" data-slide="3" aria-label="Featured product range">
         <img class="bc-bg" src="https://i.ibb.co/7t1c39cY/Untitled-design-79.png" alt="SPC Healthcare — Featured Range" loading="eager">
-      </a>
+      </div>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="4" aria-label="Featured product range">
+      <div class="bc-slide" data-slide="4" aria-label="Featured product range">
         <img class="bc-bg" src="https://i.ibb.co/SDgFmfjN/Untitled-design-80.png" alt="SPC Healthcare — Featured Range" loading="eager">
-      </a>
+      </div>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="5" aria-label="Featured product range">
+      <div class="bc-slide" data-slide="5" aria-label="Featured product range">
         <img class="bc-bg" src="https://i.ibb.co/v0D8qJf/Untitled-design-81.png" alt="SPC Healthcare — Featured Range" loading="eager">
-      </a>
+      </div>
 
-      <a class="bc-slide" href="#categories" onclick="return showProducts(event)" data-slide="6" aria-label="Featured product range">
+      <div class="bc-slide" data-slide="6" aria-label="Featured product range">
         <img class="bc-bg" src="https://i.ibb.co/nqS9Q3Jj/Untitled-design-82.png" alt="SPC Healthcare — Featured Range" loading="eager">
-      </a>
+      </div>
 
     </div>
 
@@ -2705,7 +2702,7 @@ function rewriteStaticImages() {
     if (cls.includes('mfr-pcard-logo')) return 320;
     if (cls.includes('dir-avatar') || cls.includes('tp-founder-avatar')) return 280;
     if (cls.includes('carousel-img')) return 800;
-    if (cls.includes('bc-bg') || cls.includes('pp-img')) return 2800;
+    if (cls.includes('bc-bg') || cls.includes('pp-img')) return 2200;
     if (cls.includes('plc-img') || cls.includes('lazy-img')) return 420;
     // Detect by parent
     const parent = img.parentElement;
@@ -2725,7 +2722,7 @@ function rewriteStaticImages() {
     // Higher quality for banner images (preserves sharpness on retina displays)
     const cn = img.className || '';
     const isBanner = cn.includes('bc-bg') || cn.includes('pp-img');
-    const q = isBanner ? 95 : 78;
+    const q = isBanner ? 82 : 78;
     if (src && /i\.ibb\.co/.test(src) && !src.includes('wsrv.nl')) {
       img.dataset.originalSrc = src;
       img.setAttribute('src', proxifyImg(src, w, q));
@@ -4072,7 +4069,7 @@ dropZone.addEventListener('drop', e => {
     const frame = track.parentElement;
     let idx = 0;
     const total = slides.length;
-    const AUTO_MS = 2000;
+    const AUTO_MS = 3000;
     let timer = null;
     let isHover = false;
 
@@ -4099,10 +4096,6 @@ dropZone.addEventListener('drop', e => {
     prevBtn && prevBtn.addEventListener('click', prev);
     nextBtn && nextBtn.addEventListener('click', next);
     dots.forEach(d => d.addEventListener('click', () => go(parseInt(d.dataset.go, 10))));
-
-    // Pause on hover
-    frame.addEventListener('mouseenter', () => { isHover = true; clearTimeout(timer); if (prog) prog.classList.remove('run'); });
-    frame.addEventListener('mouseleave', () => { isHover = false; restart(); });
 
     // Touch swipe
     let touchX = 0;
@@ -4143,7 +4136,7 @@ dropZone.addEventListener('drop', e => {
     const prog = document.getElementById('ppProgress');
     const frame = track.parentElement;
     let idx = 0;
-    const AUTO_MS = 2000;
+    const AUTO_MS = 3000;
     let timer = null;
     let isHover = false;
     function go(n) {
@@ -4160,8 +4153,6 @@ dropZone.addEventListener('drop', e => {
       timer = setTimeout(next, AUTO_MS);
     }
     dots.forEach(d => d.addEventListener('click', () => go(parseInt(d.dataset.go, 10))));
-    frame.addEventListener('mouseenter', () => { isHover = true; clearTimeout(timer); if (prog) prog.classList.remove('run'); });
-    frame.addEventListener('mouseleave', () => { isHover = false; restart(); });
     // Touch swipe
     let touchX = 0;
     frame.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
