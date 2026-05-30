@@ -1329,8 +1329,29 @@ body { background: #FFF1F6 !important; }
    Hides banner, hero, partners, why, about, contact so only categories show
    =================================================================== */
 body.viewing-products #mainSite > section:not(#categories):not(#products) { display: none !important; }
-body.viewing-products #categories { display: block !important; margin-top: calc(38px + 70px); }
-@media (max-width: 600px) { body.viewing-products #categories { margin-top: calc(32px + 60px); } }
+body.viewing-products #categories { display: block !important; margin-top: calc(38px + 70px); padding-top: 0 !important; }
+body.viewing-products #categories .section-inner { padding-top: 32px; }
+@media (max-width: 600px) { body.viewing-products #categories { margin-top: calc(32px + 60px); } body.viewing-products #categories .section-inner { padding-top: 24px; } }
+
+/* Products page banner carousel */
+.pp-banner-carousel { width: 100%; max-width: 1280px; margin: 32px auto 0; padding: 0 24px; }
+.pp-frame { position: relative; aspect-ratio: 2045 / 740; overflow: hidden; border-radius: 18px; box-shadow: 0 12px 40px rgba(217,39,110,0.10); background: #1E2D7E; }
+.pp-track { display: flex; height: 100%; transition: transform .7s cubic-bezier(.65,.05,.2,1); }
+.pp-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; display: block; cursor: pointer; text-decoration: none; overflow: hidden; }
+.pp-slide:hover .pp-img { transform: scale(1.02); }
+.pp-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.pp-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 8px; padding: 6px 12px; background: rgba(15,23,42,0.40); border-radius: 100px; backdrop-filter: blur(6px); }
+.pp-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.55); border: none; cursor: pointer; padding: 0; transition: all .22s; }
+.pp-dot.active { background: #fff; width: 24px; border-radius: 100px; }
+.pp-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: #D9276E; width: 0; z-index: 5; transition: width 2s linear; }
+.pp-progress.run { width: 100%; }
+@media (max-width: 600px) {
+  .pp-banner-carousel { padding: 0 16px; margin-top: 20px; }
+  .pp-frame { border-radius: 12px; }
+  .pp-dots { bottom: 8px; gap: 6px; padding: 4px 10px; }
+  .pp-dot { width: 7px; height: 7px; }
+  .pp-dot.active { width: 20px; }
+}
 
 /* ===================================================================
    TOP ANNOUNCEMENT STRIP + WHITE NAV (Mankind-style)
@@ -1584,6 +1605,25 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
 
 <!-- CATEGORIES -->
 <section class="categories-section" id="categories" style="display:none;">
+  <!-- Products page banner carousel (shown only when /products) -->
+  <div class="pp-banner-carousel" id="ppBannerCarousel">
+    <div class="pp-frame">
+      <div class="pp-track" id="ppTrack">
+        <a class="pp-slide" href="#" data-slide="0" onclick="return false;">
+          <img class="pp-img bc-bg" src="https://i.ibb.co/JWBHRWMF/Untitled-design-84.png" alt="SPC Healthcare — Featured" loading="eager" fetchpriority="high">
+        </a>
+        <a class="pp-slide" href="#" data-slide="1" onclick="return false;">
+          <img class="pp-img bc-bg" src="https://i.ibb.co/Zp0mMGLM/Untitled-design-83.png" alt="SPC Healthcare — Featured" loading="eager" fetchpriority="high">
+        </a>
+      </div>
+      <div class="pp-dots" id="ppDots" role="tablist">
+        <button class="pp-dot active" data-go="0" aria-label="Slide 1"></button>
+        <button class="pp-dot" data-go="1" aria-label="Slide 2"></button>
+      </div>
+      <div class="pp-progress" id="ppProgress"></div>
+    </div>
+  </div>
+
   <div class="section-inner">
     <div class="section-header reveal">
       <span class="section-tag">Browse by Type</span>
@@ -2665,7 +2705,7 @@ function rewriteStaticImages() {
     if (cls.includes('mfr-pcard-logo')) return 320;
     if (cls.includes('dir-avatar') || cls.includes('tp-founder-avatar')) return 280;
     if (cls.includes('carousel-img')) return 800;
-    if (cls.includes('bc-bg')) return 2800;
+    if (cls.includes('bc-bg') || cls.includes('pp-img')) return 2800;
     if (cls.includes('plc-img') || cls.includes('lazy-img')) return 420;
     // Detect by parent
     const parent = img.parentElement;
@@ -2683,7 +2723,8 @@ function rewriteStaticImages() {
     const dataSrc = img.getAttribute('data-src');
     const w = widthFor(img);
     // Higher quality for banner images (preserves sharpness on retina displays)
-    const isBanner = (img.className || '').includes('bc-bg');
+    const cn = img.className || '';
+    const isBanner = cn.includes('bc-bg') || cn.includes('pp-img');
     const q = isBanner ? 95 : 78;
     if (src && /i\.ibb\.co/.test(src) && !src.includes('wsrv.nl')) {
       img.dataset.originalSrc = src;
@@ -4090,6 +4131,45 @@ dropZone.addEventListener('drop', e => {
     } else {
       restart();
     }
+  })();
+
+  // -------- PRODUCTS PAGE BANNER CAROUSEL --------
+  (function ppBannerCarousel() {
+    const track = document.getElementById('ppTrack');
+    if (!track) return;
+    const slides = track.querySelectorAll('.pp-slide');
+    if (slides.length < 2) return;
+    const dots = document.querySelectorAll('#ppDots .pp-dot');
+    const prog = document.getElementById('ppProgress');
+    const frame = track.parentElement;
+    let idx = 0;
+    const AUTO_MS = 2000;
+    let timer = null;
+    let isHover = false;
+    function go(n) {
+      idx = ((n % slides.length) + slides.length) % slides.length;
+      track.style.transform = `translateX(-${idx * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      restart();
+    }
+    function next() { go(idx + 1); }
+    function restart() {
+      clearTimeout(timer);
+      if (prog) { prog.classList.remove('run'); void prog.offsetWidth; if (!prefersReduced && !isHover) prog.classList.add('run'); }
+      if (prefersReduced || isHover) return;
+      timer = setTimeout(next, AUTO_MS);
+    }
+    dots.forEach(d => d.addEventListener('click', () => go(parseInt(d.dataset.go, 10))));
+    frame.addEventListener('mouseenter', () => { isHover = true; clearTimeout(timer); if (prog) prog.classList.remove('run'); });
+    frame.addEventListener('mouseleave', () => { isHover = false; restart(); });
+    // Touch swipe
+    let touchX = 0;
+    frame.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    frame.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) { if (dx < 0) next(); else go(idx - 1); }
+    }, { passive: true });
+    restart();
   })();
 
   // Subtle parallax on hero molecule
