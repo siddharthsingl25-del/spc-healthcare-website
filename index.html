@@ -4217,6 +4217,26 @@ dropZone.addEventListener('drop', e => {
 </script>
 
 <!-- Zoho SalesIQ Widget -->
-<script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.in/widget?wc=siqf684cbd6c3aa0ad60567de83004a0f14013e30db2c2d745f017e022b36dbed9c" defer></script>
+<script>
+window.$zoho = window.$zoho || {};
+$zoho.salesiq = $zoho.salesiq || {
+  values: {},
+  ready: function() {
+    // Force the chat button to be visible regardless of operator status
+    try { if ($zoho.salesiq.floatbutton && $zoho.salesiq.floatbutton.visible) $zoho.salesiq.floatbutton.visible('show'); } catch(e) {}
+    try { if ($zoho.salesiq.chat && $zoho.salesiq.chat.start) {} } catch(e) {}
+    // Position the button on the right side
+    try { if ($zoho.salesiq.floatbutton && $zoho.salesiq.floatbutton.position) $zoho.salesiq.floatbutton.position('bottomright'); } catch(e) {}
+  }
+};
+</script>
+<script id="zsiqscript" src="https://salesiq.zohopublic.in/widget?wc=siqf684cbd6c3aa0ad60567de83004a0f14013e30db2c2d745f017e022b36dbed9c" defer></script>
+
+<!-- Ensure Zoho SalesIQ widget sits above all other elements + leave room next to scroll-top button -->
+<style>
+[id^="zsiq"], [class^="zsiq"], [class*="zsiq_"] { z-index: 2147483647 !important; }
+.scroll-top { bottom: 100px !important; }
+@media (max-width: 600px) { .scroll-top { bottom: 88px !important; right: 18px !important; } }
+</style>
 </body>
 </html>
