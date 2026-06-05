@@ -141,15 +141,7 @@ section{padding:80px 24px;}
 
 /* CATEGORIES */
 .categories-section{background:var(--light);}
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
-.cat-card{background:var(--white);border:1.5px solid var(--lightgray);border-radius:14px;padding:22px 16px;text-align:center;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;}
-.cat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent),var(--sky));opacity:0;transition:opacity .22s;}
-.cat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--accent);}
-.cat-card:hover::after{opacity:0.06;}
-.cat-card.active{border-color:var(--sky);background:linear-gradient(135deg,rgba(30,45,126,0.06),rgba(217,39,110,0.06));}
-.cat-icon{font-size:2rem;margin-bottom:10px;display:block;}
-.cat-name{font-size:0.82rem;font-weight:600;color:var(--navy);}
-.cat-count{font-size:0.72rem;color:var(--gray);margin-top:4px;}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:16px;}.cat-card{background:var(--white);border:1.5px solid #E2E8F0;border-radius:20px;padding:24px 18px 20px;text-align:center;cursor:pointer;transition:all .28s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;}.cat-card::before{content:'';position:absolute;inset:0;background:var(--cat-grad,linear-gradient(135deg,rgba(30,45,126,0.06),rgba(217,39,110,0.06)));opacity:0;transition:opacity .28s;}.cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--cat-grad,linear-gradient(90deg,var(--accent),var(--sky)));transform:scaleX(0);transition:transform .28s;transform-origin:left;}.cat-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(10,22,40,0.12);border-color:rgba(30,45,126,0.18);}.cat-card:hover::before{opacity:1;}.cat-card:hover::after{transform:scaleX(1);}.cat-card.active-glow{border-color:transparent;box-shadow:0 0 0 2px var(--accent),0 8px 32px rgba(30,45,126,0.18);background:linear-gradient(135deg,rgba(30,45,126,0.07),rgba(217,39,110,0.07));}.cat-card.active-glow::after{transform:scaleX(1);}.cat-icon-wrap{width:58px;height:58px;border-radius:16px;background:var(--cat-bg,#EEF2FF);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;transition:transform .28s cubic-bezier(.34,1.56,.64,1);}.cat-card:hover .cat-icon-wrap{transform:scale(1.12) rotate(-4deg);}.cat-icon{font-size:1.7rem;display:block;line-height:1;}.cat-name{font-size:0.85rem;font-weight:700;color:var(--navy);letter-spacing:.01em;margin-bottom:6px;}.cat-count{display:inline-flex;align-items:center;gap:4px;font-size:0.7rem;font-weight:600;color:var(--white);background:var(--cat-pill,var(--accent));padding:3px 10px;border-radius:20px;margin-top:2px;}
 
 /* PRODUCTS */
 .products-section{background:var(--white);}
@@ -2115,15 +2107,24 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
 .tp-depts { background: #F8FAFC; }
 .tp-dept-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .tp-dept-card {
-  background: #fff; border-radius: 20px; padding: 32px 24px; text-align: center;
-  border: 1.5px solid #E2E8F0; transition: all .3s; cursor: default; position: relative; overflow: hidden;
+  background: #fff;
+  border-radius: 22px;
+  padding: 32px 24px;
+  text-align: center;
+  border: 1.5px solid #E2E8F0;
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
 }
 .tp-dept-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #1E2D7E, #D9276E); transform: scaleX(0); transition: transform .3s; transform-origin: left; }
-.tp-dept-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(10,22,40,0.1); border-color: rgba(30,45,126,0.15); }
+.tp-dept-card:hover { transform: translateY(-7px); box-shadow: 0 24px 64px rgba(10,22,40,0.12); border-color: rgba(30,45,126,0.14); }
 .tp-dept-card:hover::before { transform: scaleX(1); }
-.tp-dept-emoji { font-size: 2.8rem; margin-bottom: 16px; display: block; line-height: 1; }
+.tp-dept-emoji-wrap { width: 64px; height: 64px; border-radius: 18px; background: linear-gradient(135deg, rgba(30,45,126,0.08), rgba(217,39,110,0.08)); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+.tp-dept-card:hover .tp-dept-emoji-wrap { transform: scale(1.1) rotate(-4deg); }
+.tp-dept-emoji { font-size: 2rem; display: block; line-height: 1; }
 .tp-dept-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 800; color: #0B0F19; margin-bottom: 8px; }
-.tp-dept-desc { font-size: 0.8rem; color: #64748B; line-height: 1.6; }
+.tp-dept-desc { font-size: 0.8rem; color: #64748B; line-height: 1.65; }
 
 /* VALUES SECTION */
 .tp-values { background: #0B0F19; padding: 80px 24px; }
@@ -2228,46 +2229,14 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
       <p>Every department plays a critical role in ensuring quality medicines reach our partners efficiently.</p>
     </div>
     <div class="tp-dept-grid">
-      <div class="tp-dept-card">
-        <span class="tp-dept-emoji">📈</span>
-        <div class="tp-dept-name">Sales & Marketing</div>
-        <div class="tp-dept-desc">Driving growth and building strong relationships with distributors and healthcare providers pan-India</div>
-      </div>
-      <div class="tp-dept-card">
-        <span class="tp-dept-emoji">🏥</span>
-        <div class="tp-dept-name">Medical Representatives</div>
-        <div class="tp-dept-desc">On-ground promotion and product education with doctors, hospitals and clinics across regions</div>
-      </div>
-      <div class="tp-dept-card">
-        <span class="tp-dept-emoji">🚚</span>
-        <div class="tp-dept-name">Supply Chain</div>
-        <div class="tp-dept-desc">End-to-end logistics ensuring every order is accurate, compliant and delivered on time</div>
-      </div>
-      <div class="tp-dept-card">
-        <span class="tp-dept-emoji">💼</span>
-        <div class="tp-dept-name">Business Development</div>
-        <div class="tp-dept-desc">Identifying new markets, onboarding manufacturers and building strategic partnerships for growth</div>
-      </div>
-      <div class="tp-dept-card">
-        <span class="tp-dept-emoji">📊</span>
-        <div class="tp-dept-name">Accounts & Finance</div>
-        <div class="tp-dept-desc">Managing all financial operations, billing, compliance and reporting with precision</div>
-      </div>
-      <div class="tp-dept-card">
-        <span class="tp-dept-emoji">🎧</span>
-        <div class="tp-dept-name">Customer Support</div>
-        <div class="tp-dept-desc">Resolving queries, managing orders and ensuring every client feels heard and valued</div>
-      </div>
-      <div class="tp-dept-card">
-        <span class="tp-dept-emoji">👩‍💼</span>
-        <div class="tp-dept-name">HR & Admin</div>
-        <div class="tp-dept-desc">Recruiting, nurturing and developing the talented people who power SPC Healthcare forward</div>
-      </div>
-      <div class="tp-dept-card">
-        <span class="tp-dept-emoji">💻</span>
-        <div class="tp-dept-name">IT & Digital</div>
-        <div class="tp-dept-desc">Managing technology, digital presence and systems that keep the business running smoothly</div>
-      </div>
+      <div class="tp-dept-card"><div class="tp-dept-emoji-wrap"><span class="tp-dept-emoji">📈</span></div><div class="tp-dept-name">Sales &amp; Marketing</div><div class="tp-dept-desc">Driving growth and building strong relationships with distributors and healthcare providers pan-India</div></div>
+      <div class="tp-dept-card"><div class="tp-dept-emoji-wrap"><span class="tp-dept-emoji">🏥</span></div><div class="tp-dept-name">Medical Representatives</div><div class="tp-dept-desc">On-ground promotion and product education with doctors, hospitals and clinics across regions</div></div>
+      <div class="tp-dept-card"><div class="tp-dept-emoji-wrap"><span class="tp-dept-emoji">🚚</span></div><div class="tp-dept-name">Supply Chain</div><div class="tp-dept-desc">End-to-end logistics ensuring every order is accurate, compliant and delivered on time</div></div>
+      <div class="tp-dept-card"><div class="tp-dept-emoji-wrap"><span class="tp-dept-emoji">💼</span></div><div class="tp-dept-name">Business Development</div><div class="tp-dept-desc">Identifying new markets, onboarding manufacturers and building strategic partnerships for growth</div></div>
+      <div class="tp-dept-card"><div class="tp-dept-emoji-wrap"><span class="tp-dept-emoji">📊</span></div><div class="tp-dept-name">Accounts &amp; Finance</div><div class="tp-dept-desc">Managing all financial operations, billing, compliance and reporting with precision</div></div>
+      <div class="tp-dept-card"><div class="tp-dept-emoji-wrap"><span class="tp-dept-emoji">🎧</span></div><div class="tp-dept-name">Customer Support</div><div class="tp-dept-desc">Resolving queries, managing orders and ensuring every client feels heard and valued</div></div>
+      <div class="tp-dept-card"><div class="tp-dept-emoji-wrap"><span class="tp-dept-emoji">👩‍💼</span></div><div class="tp-dept-name">HR &amp; Admin</div><div class="tp-dept-desc">Recruiting, nurturing and developing the talented people who power SPC Healthcare forward</div></div>
+      <div class="tp-dept-card"><div class="tp-dept-emoji-wrap"><span class="tp-dept-emoji">💻</span></div><div class="tp-dept-name">IT &amp; Digital</div><div class="tp-dept-desc">Managing technology, digital presence and systems that keep the business running smoothly</div></div>
     </div>
   </div>
 </div>
@@ -3211,17 +3180,29 @@ function getCategories() {
 function renderCategories() {
   const grid = document.getElementById('catGrid');
   const cats = getCategories();
+  const CAT_COLORS = {
+    'Tablets':        {bg:'#EEF2FF',pill:'#4F46E5',grad:'linear-gradient(135deg,rgba(79,70,229,0.09),rgba(99,102,241,0.05))'},
+    'Capsules':       {bg:'#FFF7ED',pill:'#EA580C',grad:'linear-gradient(135deg,rgba(234,88,12,0.09),rgba(251,146,60,0.05))'},
+    'Syrups':         {bg:'#F0FDF4',pill:'#16A34A',grad:'linear-gradient(135deg,rgba(22,163,74,0.09),rgba(74,222,128,0.05))'},
+    'Dry Syrups':     {bg:'#FFF1F2',pill:'#E11D48',grad:'linear-gradient(135deg,rgba(225,29,72,0.09),rgba(251,113,133,0.05))'},
+    'Oral Suspension':{bg:'#F0F9FF',pill:'#0284C7',grad:'linear-gradient(135deg,rgba(2,132,199,0.09),rgba(56,189,248,0.05))'},
+    'Oral Drops':     {bg:'#F5F3FF',pill:'#7C3AED',grad:'linear-gradient(135deg,rgba(124,58,237,0.09),rgba(167,139,250,0.05))'},
+    'Creams & Oints': {bg:'#FEFCE8',pill:'#CA8A04',grad:'linear-gradient(135deg,rgba(202,138,4,0.09),rgba(250,204,21,0.05))'},
+    'Soap':           {bg:'#F0FDFA',pill:'#0D9488',grad:'linear-gradient(135deg,rgba(13,148,136,0.09),rgba(45,212,191,0.05))'},
+    'Sachet':         {bg:'#FFF7ED',pill:'#D97706',grad:'linear-gradient(135deg,rgba(217,119,6,0.09),rgba(251,191,36,0.05))'},
+    'Nasal Drop':     {bg:'#FDF2F8',pill:'#9D174D',grad:'linear-gradient(135deg,rgba(157,23,77,0.09),rgba(244,114,182,0.05))'},
+  };
   let html = ``;
   for (const [cat, cnt] of Object.entries(cats)) {
-    html += `<div class="cat-card ${currentFilter===cat?'active-glow':''}" onclick="filterByCategory('${cat}')" id="cat-${cat.replace(/[^a-z0-9]/gi,'_')}">
-      <span class="cat-icon">${CAT_ICONS[cat]||'💊'}</span>
+    const c = CAT_COLORS[cat] || {bg:'#EEF2FF',pill:'#4F46E5',grad:'linear-gradient(135deg,rgba(30,45,126,0.06),rgba(217,39,110,0.06))'};
+    html += `<div class="cat-card ${currentFilter===cat?'active-glow':''}" onclick="filterByCategory('${cat}')" id="cat-${cat.replace(/[^a-z0-9]/gi,'_')}" style="--cat-bg:${c.bg};--cat-pill:${c.pill};--cat-grad:${c.grad};">
+      <div class="cat-icon-wrap"><span class="cat-icon">${CAT_ICONS[cat]||'💊'}</span></div>
       <div class="cat-name">${cat}</div>
-      <div class="cat-count">${cnt} items</div>
+      <span class="cat-count">${cnt} products</span>
     </div>`;
   }
   grid.innerHTML = html;
 }
-
 function filterByCategory(cat) {
   currentFilter = cat;
   currentSearch = '';
