@@ -1488,11 +1488,11 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
     </a>
     <div class="nav-links">
       <a href="/" class="active" onclick="showMain();return false;">Home</a>
-      <a href="#categories" onclick="return showProducts(event)">Products</a>
-      <a href="#about" onclick="showMain()">About Us</a>
-      <a href="#" onclick="showTeam();return false;" id="navTeam">Our Team</a>
-      <a href="#" onclick="showCareers();return false;" id="navCareers">Careers</a>
-      <a href="#contact" class="nav-cta" onclick="showMain()">Contact</a>
+      <a href="/products" onclick="return showProducts(event)">Products</a>
+      <a href="/#about" onclick="showMain('about');return false;">About Us</a>
+      <a href="/team" onclick="showTeam();return false;" id="navTeam">Our Team</a>
+      <a href="/careers" onclick="showCareers();return false;" id="navCareers">Careers</a>
+      <a href="/#contact" class="nav-cta" onclick="showMain('contact');return false;">Contact</a>
     </div>
     <div class="nav-search" id="navSearch" style="position:relative;">
       <div class="nav-search-box">
@@ -1509,11 +1509,11 @@ nav#navbar .nav-search-box button:hover { background: #2D3D9A !important; }
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
   <a href="/" onclick="showMain();toggleMobileNav();return false;">🏠 Home</a>
-  <a href="#categories" onclick="showProducts(event);toggleMobileNav();return false;">💊 Products</a>
-  <a href="#about" onclick="showMain();toggleMobileNav()">ℹ️ About Us</a>
-  <a href="#" onclick="showTeam();toggleMobileNav();return false;">👥 Our Team</a>
-  <a href="#" onclick="showCareers();toggleMobileNav();return false;">💼 Careers</a>
-  <a href="#contact" onclick="showMain();toggleMobileNav()">📞 Contact</a>
+  <a href="/products" onclick="showProducts(event);toggleMobileNav();return false;">💊 Products</a>
+  <a href="/#about" onclick="showMain('about');toggleMobileNav();return false;">ℹ️ About Us</a>
+  <a href="/team" onclick="showTeam();toggleMobileNav();return false;">👥 Our Team</a>
+  <a href="/careers" onclick="showCareers();toggleMobileNav();return false;">💼 Careers</a>
+  <a href="/#contact" onclick="showMain('contact');toggleMobileNav();return false;">📞 Contact</a>
 </div>
 
 <!-- HERO -->
