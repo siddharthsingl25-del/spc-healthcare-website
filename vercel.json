@@ -4,8 +4,10 @@
     { "source": "/products/:slug*", "destination": "/index.html" },
     { "source": "/p/:slug*", "destination": "/index.html" },
     { "source": "/careers", "destination": "/index.html" },
-    { "source": "/team", "destination": "/index.html" }
+    { "source": "/careers/", "destination": "/index.html" },
+    { "source": "/team", "destination": "/index.html" },
+    { "source": "/team/", "destination": "/index.html" }
   ],
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false
 }
