@@ -3619,6 +3619,16 @@ window.addEventListener('popstate', () => { handleRoute(); });
 // Initial route check on load
 function handleRoute() {
   const path = window.location.pathname;
+  // Careers page (/careers)
+  if (path === '/careers' || path === '/careers/') {
+    showCareers(false);
+    return;
+  }
+  // Team page (/team)
+  if (path === '/team' || path === '/team/') {
+    showTeam(false);
+    return;
+  }
   // Products listing page (/products)
   if (path === '/products' || path === '/products/') {
     showProducts(null, false);
@@ -3756,13 +3766,21 @@ function goCarousel(idx) {
 
 
 // ===== TEAM PAGE SWITCHER =====
-function showTeam() {
+function showTeam(pushUrl) {
+  if (pushUrl === undefined) pushUrl = true;
   document.body.classList.remove('viewing-products');
   document.getElementById('mainSite').style.display = 'none';
   document.getElementById('careersPage').style.display = 'none';
   if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
   document.getElementById('teamPage').style.display = 'block';
-  if (window.location.pathname.startsWith('/products')) { try { history.pushState({}, '', '/'); } catch(e){} }
+  // Update URL for shareable link
+  if (pushUrl && window.location.pathname !== '/team') {
+    try { history.pushState({ view: 'team' }, '', '/team'); } catch(e){}
+  }
+  // SEO title + meta
+  document.title = 'Our Team | SPC Healthcare Pvt Ltd';
+  const metaDescT = document.querySelector('meta[name="description"]');
+  if (metaDescT) metaDescT.content = 'Meet the team behind SPC Healthcare — leadership, departments, and the values driving India\'s trusted B2B pharmaceutical distribution network.';
   if(document.getElementById('navTeam')) {
     document.getElementById('navTeam').style.color = '#fff';
     document.getElementById('navTeam').style.background = 'rgba(30,45,126,0.4)';
@@ -3775,13 +3793,21 @@ function showTeam() {
 }
 
 // ===== PAGE SWITCHER =====
-function showCareers() {
+function showCareers(pushUrl) {
+  if (pushUrl === undefined) pushUrl = true;
   document.body.classList.remove('viewing-products');
   document.getElementById('mainSite').style.display = 'none';
   document.getElementById('careersPage').style.display = 'block';
   if(document.getElementById('teamPage')) document.getElementById('teamPage').style.display = 'none';
   if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
-  if (window.location.pathname.startsWith('/products')) { try { history.pushState({}, '', '/'); } catch(e){} }
+  // Update URL for shareable link
+  if (pushUrl && window.location.pathname !== '/careers') {
+    try { history.pushState({ view: 'careers' }, '', '/careers'); } catch(e){}
+  }
+  // SEO title + meta
+  document.title = 'Careers | SPC Healthcare Pvt Ltd';
+  const metaDescC = document.querySelector('meta[name="description"]');
+  if (metaDescC) metaDescC.content = 'Join SPC Healthcare — one of India\'s fastest-growing B2B pharmaceutical distribution companies. Open positions across Sales, Operations, Supply Chain and more.';
   if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = '#fff'; document.getElementById('navCareers').style.background = 'rgba(37,99,216,0.4)'; }
   if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3823,7 +3849,15 @@ function showMain(anchor) {
   if(document.getElementById('teamPage')) document.getElementById('teamPage').style.display = 'none';
   if(document.getElementById('productPage')) document.getElementById('productPage').style.display = 'none';
   document.getElementById('mainSite').style.display = 'block';
-  if (window.location.pathname.startsWith('/products')) { try { history.pushState({}, '', '/'); } catch(e){} }
+  // Clean URL back to home if we were on a subpage
+  const path = window.location.pathname;
+  if (path.startsWith('/products') || path.startsWith('/careers') || path.startsWith('/team')) {
+    try { history.pushState({}, '', '/'); } catch(e){}
+  }
+  // Reset title/meta
+  document.title = 'SPC Healthcare Pvt Ltd – B2B Pharmaceutical';
+  const metaDescH = document.querySelector('meta[name="description"]');
+  if (metaDescH) metaDescH.content = 'SPC Healthcare Pvt Ltd — premium B2B pharmaceutical distribution serving hospitals, distributors and retail chains across India. 180+ products, 26+ manufacturers, 10 therapy divisions.';
   if(document.getElementById('navCareers')) { document.getElementById('navCareers').style.color = ''; document.getElementById('navCareers').style.background = ''; }
   if(document.getElementById('navTeam')) { document.getElementById('navTeam').style.color = ''; document.getElementById('navTeam').style.background = ''; }
   // When going Home (no anchor), hide categories again to keep homepage clean
